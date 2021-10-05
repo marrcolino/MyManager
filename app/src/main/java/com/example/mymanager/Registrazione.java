@@ -82,8 +82,8 @@ public class Registrazione extends AppCompatActivity {
                 }
 
                 if (!campiVuoti) {
-                    //DatabaseHelper mDatabaseHelper = new DatabaseHelper(Registrazione.this);
-                    boolean insertUser = false;//mDatabaseHelper.addUser(email, password, nome, cognome, dataNascita, matricola);
+
+                    boolean insertUser = MainActivity.DB.insertUserData( matricola , nome ,  cognome ,  email ,  password ,  dataNascita);
 
                     if (insertUser) {
                         toastMessage("Registrazione completata!");

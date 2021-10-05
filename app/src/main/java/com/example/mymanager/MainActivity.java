@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Animation topAnim, bottomAnim;
-    ImageView img;
-    TextView textView;
-    private Button button;
+    private Animation topAnim, bottomAnim;
+    private ImageView img;
+    private TextView textView;
+    public static DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Login.class));
             }
         });
+
+        DB = new DBHelper(this);
+
     }
 }
