@@ -2,8 +2,10 @@ package com.example.mymanager;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
@@ -14,8 +16,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase DB) {
         DB.execSQL("create Table Studente (matricola TEXT primary key, nome TEXT, cognome TEXT, email TEXT, password TEXT, dataNascita TEXT )");
         DB.execSQL("create Table Professore ( matricola TEXT primary key, nome TEXT, cognome TEXT, email TEXT, password TEXT, dataNascita TEXT)");
-        DB.execSQL("create Table CasoDiStudio ( ID INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descrizione TEXT, esame TEXT, matricolaProfessore TEXT)");
-        DB.execSQL("create Table Gruppo ( ID INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, matricolaPartecipante1 TEXT, matricolaPartecipante2 TEXT, matricolaPartecipante3 TEXT, matricolaPartecipante4 TEXT, IDCasoStudio INTEGER, FOREIGN KEY (IDCasoStudio) REFERENCES CasoDiStudio(ID))");
+        DB.execSQL("create Table CasoDiStudio ( ID INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descrizione TEXT, esame TEXT, matricolaProfessore TEXT, FOREIGN KEY (matricolaProfessore) REFERENCES Professore(matricola))");
+        DB.execSQL("create Table Gruppo ( ID INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, matricolaPartecipante1 TEXT, matricolaPartecipante2 TEXT, matricolaPartecipante3 TEXT, matricolaPartecipante4 TEXT, IDCasoStudio INTEGER, FOREIGN KEY (IDCasoStudio) REFERENCES CasoDiStudio(ID), FOREIGN KEY (matricolaPartecipante1) REFERENCES Studente(matricola), FOREIGN KEY (matricolaPartecipante2) REFERENCES Studente(matricola), FOREIGN KEY (matricolaPartecipante3) REFERENCES Studente(matricola), FOREIGN KEY (matricolaPartecipante4) REFERENCES Studente(matricola))");
     }
 
     @Override
@@ -50,5 +52,17 @@ public class DBHelper extends SQLiteOpenHelper {
             result = DB.insert("Professore", null, contentValues);
         }
         return result!= -1;
+    }
+    public Cursor login (String matricola, String password){
+        Cursor cursor;
+        SQLiteDatabase DB = this.getWritableDatabase();
+
+        if(matricola.charAt(0)!='0') {
+            cursor = DB.rawQuery("Select * FROM Studente WHERE matricola = '" + matricola + "' AND password  = '" + password +"'",null);
+
+        }else{
+            cursor = DB.rawQuery("Select * FROM Professore WHERE matricola = '" + matricola + "' AND password  = '" + password +"'",null);
+        }
+        return cursor;
     }
 }

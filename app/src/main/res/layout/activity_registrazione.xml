@@ -128,57 +128,10 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/textViewIdentita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"
-                android:text="Registrati come"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent" />
-
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton android:id="@+id/radioStudente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#0094FF"
-                    android:background="@drawable/edit_text_style"
-                    android:layout_margin="20dp"
-                    android:padding="10dp"
-                    android:textSize="20dp"
-                    android:text="Studente"/>
-                <RadioButton android:id="@+id/radioProfessore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_text_style"
-                    android:layout_margin="20dp"
-                    android:padding="10dp"
-                    android:textColor="#0094FF"
-                    android:textSize="20dp"
-                    android:text="Professore"/>
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/textViewPasswordDim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:clickable="true"
-                android:text="Password dimenticata?"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                android:onClick="onClick"/>
+                android:orientation="horizontal"/>
 
             <Button
                 android:id="@+id/buttonRegistrati"

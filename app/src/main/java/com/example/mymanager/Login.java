@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +20,7 @@ import android.widget.Toast;
 public class Login extends AppCompatActivity {
 
     Button buttonLogin;
-    EditText editTextEmail, editTextPassword;
+    EditText editTextMatricola, editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +46,16 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                editTextEmail = findViewById(R.id.editTextEmailAddress);
-                String email = editTextEmail.getText().toString();
+                editTextMatricola = findViewById(R.id.editTextMatricola);
+                String matricola = editTextMatricola.getText().toString();
                 editTextPassword = findViewById(R.id.editTextPassword);
-                String password = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
 
                 boolean campiVuoti = false;
 
-                if(email.isEmpty()){
+                if(matricola.isEmpty()){
                     campiVuoti = true;
-                    editTextEmail.setError("Riempire il campo!");
+                    editTextMatricola.setError("Riempire il campo!");
                 }
                 if(password.isEmpty()){
                     campiVuoti = true;
@@ -61,7 +63,13 @@ public class Login extends AppCompatActivity {
                 }
 
                 if (!campiVuoti) {
-                    toastMessage("Registrazione completata!");
+                    Cursor cursor = MainActivity.DB.login(matricola,password);
+                    if(cursor.getCount()>0){
+                        toastMessage("Login riuscito!");
+                    }else{
+                        toastMessage("Matricola o password errati!");
+                    }
+
                 } else {
                     toastMessage("Riempire tutti i campi!");
                 }

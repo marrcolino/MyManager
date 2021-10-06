@@ -30,11 +30,6 @@ public class Registrazione extends AppCompatActivity {
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        TextView textView = findViewById(R.id.textViewPasswordDim);
-        SpannableString content = new SpannableString( "Password dimenticata?" );
-        content.setSpan( new UnderlineSpan() , 0 , content.length() , 0 );
-        textView.setText(content);
-
         buttonReg = findViewById(R.id.buttonRegistrati);
 
         buttonReg.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +112,4 @@ public class Registrazione extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
-    //TAG PASSWORD DIMENTICATA CLICK
-    public void onClick(View v) {
-
-    }
 }

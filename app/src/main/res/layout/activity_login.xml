@@ -33,15 +33,15 @@
                 app:srcCompat="@drawable/logo" />
 
             <EditText
-                android:id="@+id/editTextEmailAddress"
+                android:id="@+id/editTextMatricola"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
                 android:background="@drawable/edit_text_style"
                 android:ems="10"
-                android:hint="Inserisci l'email"
+                android:hint="Inserisci la matricola"
                 android:padding="10dp"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:shadowColor="@color/black"
                 android:textColor="#0094FF"
                 app:layout_constraintEnd_toEndOf="parent"
