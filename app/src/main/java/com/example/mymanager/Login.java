@@ -66,6 +66,7 @@ public class Login extends AppCompatActivity {
                     Cursor cursor = MainActivity.DB.login(matricola,password);
                     if(cursor.getCount()>0){
                         toastMessage("Login riuscito!");
+                        startActivity(new Intent(Login.this, Home.class));
                     }else{
                         toastMessage("Matricola o password errati!");
                     }
