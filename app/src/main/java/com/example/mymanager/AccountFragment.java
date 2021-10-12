@@ -2,11 +2,14 @@ package com.example.mymanager;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +27,8 @@ public class AccountFragment extends Fragment {
 
     Button buttonModifica;
     EditText editTextEmail, editTextPassword, editTextNome, editTextCognome, editTextDataNascita, editTextMatricola;
+    ImageView imageViewLogo;
+    Drawable drawable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,10 +37,23 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         //TESTO SOTTOLINEATO
-        TextView textView = (TextView) view.findViewById(R.id.textViewCambiaImg);
+        Button buttonView = (Button) view.findViewById(R.id.textViewCambiaImg);
         SpannableString content = new SpannableString( "Cambia immagine del profilo" );
         content.setSpan( new UnderlineSpan() , 0 , content.length() , 0 );
-        textView.setText(content);
+        buttonView.setBackgroundColor(Color.WHITE);
+        buttonView.setText(content);
+
+        buttonView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,3);
+            }
+        });
+
+
+        imageViewLogo  = (ImageView)view.findViewById(R.id.imageViewLogo);
+        imageViewLogo.setImageDrawable(drawable);
 
         editTextEmail = (EditText)view.findViewById(R.id.editTextEmail);
         editTextEmail.setText(MainActivity.utenteLoggato.email);
@@ -113,6 +132,8 @@ public class AccountFragment extends Fragment {
 
         return view;
     }
+
+
 
     /**
      * customizable toast

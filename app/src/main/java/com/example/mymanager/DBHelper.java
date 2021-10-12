@@ -14,8 +14,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table Studente (matricola TEXT primary key, nome TEXT, cognome TEXT, email TEXT, password TEXT, dataNascita TEXT )");
-        DB.execSQL("create Table Professore ( matricola TEXT primary key, nome TEXT, cognome TEXT, email TEXT, password TEXT, dataNascita TEXT)");
+        DB.execSQL("create Table Studente (matricola TEXT primary key, nome TEXT, cognome TEXT, email TEXT, password TEXT, dataNascita TEXT,foto TEXT )");
+        DB.execSQL("create Table Professore ( matricola TEXT primary key, nome TEXT, cognome TEXT, email TEXT, password TEXT, dataNascita TEXT, foto TEXT)");
         DB.execSQL("create Table CasoDiStudio ( ID INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descrizione TEXT, esame TEXT, matricolaProfessore TEXT, FOREIGN KEY (matricolaProfessore) REFERENCES Professore(matricola))");
         DB.execSQL("create Table Gruppo ( ID INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, matricolaPartecipante1 TEXT, matricolaPartecipante2 TEXT, matricolaPartecipante3 TEXT, matricolaPartecipante4 TEXT, IDCasoStudio INTEGER, FOREIGN KEY (IDCasoStudio) REFERENCES CasoDiStudio(ID), FOREIGN KEY (matricolaPartecipante1) REFERENCES Studente(matricola), FOREIGN KEY (matricolaPartecipante2) REFERENCES Studente(matricola), FOREIGN KEY (matricolaPartecipante3) REFERENCES Studente(matricola), FOREIGN KEY (matricolaPartecipante4) REFERENCES Studente(matricola))");
     }

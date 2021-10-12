@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(MainActivity.utenteLoggato.matricola != "")
         {
+            MainActivity.utenteLoggato.fotoProfilo= null;
             MainActivity.utenteLoggato.matricola = "";
             MainActivity.utenteLoggato.nome = "";
             MainActivity.utenteLoggato.cognome = "";

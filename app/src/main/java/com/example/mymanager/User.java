@@ -1,7 +1,10 @@
 package com.example.mymanager;
 
+import android.media.Image;
+
 public class User {
 
+    public static Image fotoProfilo;
     public static String matricola;
     public static String nome;
     public static String cognome;
@@ -10,6 +13,7 @@ public class User {
     public static String dataNascita;
 
     public User(){
+        this.fotoProfilo=fotoProfilo;
         this.matricola=matricola;
         this.nome=nome;
         this.cognome=cognome;
