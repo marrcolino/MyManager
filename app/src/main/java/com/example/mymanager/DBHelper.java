@@ -65,4 +65,26 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public Cursor getData(String matricola){
+        Cursor cursor;
+        SQLiteDatabase DB = this.getWritableDatabase();
+        if(matricola.charAt(0)!='0'){
+             cursor = DB.rawQuery("Select * FROM Studente WHERE matricola = '"+matricola+"'",null);
+        }else{
+             cursor = DB.rawQuery("Select * FROM Professore WHERE matricola = '"+matricola+"'" ,null);
+        }
+        return cursor;
+    }
+
+   /* public Cursor readAllData(){
+        String query = "SELECT * FROM Userdetails " + null;
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
+    }*/
 }

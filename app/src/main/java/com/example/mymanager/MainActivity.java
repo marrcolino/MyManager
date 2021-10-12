@@ -13,16 +13,19 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private Animation topAnim, bottomAnim;
     private ImageView img;
     private TextView textView;
     public static DBHelper DB;
+    public static User utenteLoggato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //utenteLoggato=new User();
         //requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
 

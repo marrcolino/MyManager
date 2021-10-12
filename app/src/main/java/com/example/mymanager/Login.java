@@ -65,6 +65,19 @@ public class Login extends AppCompatActivity {
                 if (!campiVuoti) {
                     Cursor cursor = MainActivity.DB.login(matricola,password);
                     if(cursor.getCount()>0){
+                        if(cursor.getCount()==0){
+                            toastMessage("ERRORE: Lista utente loggato vuota");
+
+                        }else {
+                            while(cursor.moveToNext()) {
+                           MainActivity.utenteLoggato.matricola=cursor.getString(0);
+                            MainActivity.utenteLoggato.nome=cursor.getString(1);
+                            MainActivity.utenteLoggato.cognome=cursor.getString(2);
+                            MainActivity.utenteLoggato.email=cursor.getString(3);
+                            MainActivity.utenteLoggato.password=cursor.getString(4);
+                            MainActivity.utenteLoggato.dataNascita=cursor.getString(5);
+                            }
+                        }
                         toastMessage("Login riuscito!");
                         startActivity(new Intent(Login.this, Home.class));
                     }else{
