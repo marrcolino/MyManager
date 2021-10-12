@@ -3,6 +3,7 @@ package com.example.mymanager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableString;
@@ -24,7 +25,7 @@ public class Registrazione extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\"> Registrazione </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Registrazione </font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         // showing the back button in action bar
@@ -82,6 +83,7 @@ public class Registrazione extends AppCompatActivity {
 
                     if (insertUser) {
                         toastMessage("Registrazione completata!");
+                        startActivity(new Intent(Registrazione.this, Login.class));
                     } else {
                         toastMessage("Something went wrong");
                     }

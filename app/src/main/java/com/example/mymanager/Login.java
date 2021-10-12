@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         textView.setText(content);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\"> Login </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Login </font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         // showing the back button in action bar

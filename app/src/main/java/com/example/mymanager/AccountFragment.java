@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,27 +30,11 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        /*StringBuffer buffer = new StringBuffer();
-        Cursor res = MainActivity.DB.getData(MainActivity.utenteLoggato.matricola);
-        if(res.getCount()==0){
-            Toast.makeText(getActivity(),"No Entry Exists", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(Home.this, "No Entry Exists", Toast.LENGTH_SHORT).show();
-
-        }else {
-            while (res.moveToNext()) {
-                buffer.append("matricola :" + res.getString(0) + "\n");
-                buffer.append("nome :" + res.getString(1) + "\n");
-                buffer.append("cognome :" + res.getString(2) + "\n\n");
-                buffer.append("email :" + res.getString(3) + "\n");
-                buffer.append("password :" + res.getString(4) + "\n");
-                buffer.append("dataNascita :" + res.getString(5) + "\n\n");
-            }
-        }*/
-       /* AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(true);
-        builder.setTitle("User Entries");
-        builder.setMessage(buffer.toString());
-        builder.show();*/
+        //TESTO SOTTOLINEATO
+        TextView textView = (TextView) view.findViewById(R.id.textViewCambiaImg);
+        SpannableString content = new SpannableString( "Cambia immagine del profilo" );
+        content.setSpan( new UnderlineSpan() , 0 , content.length() , 0 );
+        textView.setText(content);
 
         editTextEmail = (EditText)view.findViewById(R.id.editTextEmail);
         editTextEmail.setText(MainActivity.utenteLoggato.email);
@@ -68,9 +54,9 @@ public class AccountFragment extends Fragment {
         editTextMatricola = (EditText)view.findViewById(R.id.editTextMatricola);
         editTextMatricola.setText(MainActivity.utenteLoggato.matricola);
 
-        buttonModifica = (Button)view.findViewById(R.id.buttonLogin);
+        buttonModifica = (Button)view.findViewById(R.id.buttonModifica);
 
-        /*buttonModifica.setOnClickListener(new View.OnClickListener() {
+        buttonModifica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -117,12 +103,13 @@ public class AccountFragment extends Fragment {
                     } else {
                         toastMessage("Something went wrong");
                     }
+                    startActivity(new Intent(getActivity(), Home.class));
                 } else {
                     toastMessage("Riempire tutti i campi!");
                 }
 
             }
-        });*/
+        });
 
         return view;
     }

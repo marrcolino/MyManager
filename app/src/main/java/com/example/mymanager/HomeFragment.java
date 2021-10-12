@@ -1,5 +1,6 @@
 package com.example.mymanager;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,19 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
 
         buildListData();
         initRecyclerView(view);
+
+        //RICARICO LA VARIABILE GLOBALE
+        Cursor cursor = MainActivity.DB.login(MainActivity.utenteLoggato.matricola, MainActivity.utenteLoggato.password);
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()) {
+                MainActivity.utenteLoggato.matricola = cursor.getString(0);
+                MainActivity.utenteLoggato.nome = cursor.getString(1);
+                MainActivity.utenteLoggato.cognome = cursor.getString(2);
+                MainActivity.utenteLoggato.email = cursor.getString(3);
+                MainActivity.utenteLoggato.password = cursor.getString(4);
+                MainActivity.utenteLoggato.dataNascita = cursor.getString(5);
+            }
+        }
 
         return view;
     }
