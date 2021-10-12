@@ -43,23 +43,18 @@ public class Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_account, R.id.nav_slideshow, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_account, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-      // getResources().getString(R.string.nav_header_title,"ciolaaaa");
-        //R.string.nav_header_title = Integer.parseInt("ciolaaa"); change file strings from class android studio
-
         View headerView = navigationView.getHeaderView(0);
-
         final TextView Name_nav = (TextView) headerView.findViewById(R.id.textViewNomeCognome);
         final TextView Email_nav = (TextView) headerView.findViewById(R.id.textViewEmail);
         Name_nav.setText(MainActivity.utenteLoggato.nome + " " + MainActivity.utenteLoggato.cognome);
         Email_nav.setText(MainActivity.utenteLoggato.email);
-
     }
 
     @Override

@@ -53,6 +53,34 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return result!= -1;
     }
+
+    public Boolean updateUserData(String matricola ,String nome , String cognome , String email , String password , String dataNascita ) {
+        int result;
+        if (matricola.charAt(0) != '0') {
+            SQLiteDatabase DB = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("matricola", matricola);
+            contentValues.put("nome", nome);
+            contentValues.put("cognome", cognome);
+            contentValues.put("email", email);
+            contentValues.put("password", password);
+            contentValues.put("dataNascita", dataNascita);
+            //long result = DB.update("Userdetails", contentValues, "name=?", new String[]{name});
+            result = DB.update("Studente", contentValues, "matricola=?", new String[]{matricola});
+        } else {
+            SQLiteDatabase DB = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("matricola", matricola);
+            contentValues.put("nome", nome);
+            contentValues.put("cognome", cognome);
+            contentValues.put("email", email);
+            contentValues.put("password", password);
+            contentValues.put("dataNascita", dataNascita);
+            result = DB.update("Professore", contentValues, "matricola=?", new String[]{matricola});
+        }
+        return result!= -1;
+    }
+
     public Cursor login (String matricola, String password){
         Cursor cursor;
         SQLiteDatabase DB = this.getWritableDatabase();

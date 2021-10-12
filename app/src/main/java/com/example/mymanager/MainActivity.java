@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,5 +50,23 @@ public class MainActivity extends AppCompatActivity {
 
         DB = new DBHelper(this);
 
+        if(MainActivity.utenteLoggato.matricola != "")
+        {
+            MainActivity.utenteLoggato.matricola = "";
+            MainActivity.utenteLoggato.nome = "";
+            MainActivity.utenteLoggato.cognome = "";
+            MainActivity.utenteLoggato.email = "";
+            MainActivity.utenteLoggato.password = "";
+            MainActivity.utenteLoggato.dataNascita = "";
+        }
+
+    }
+
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0094FF"
+    android:background="#FFFFFF"
     tools:context=".AccountFragment">
 
     <ScrollView
@@ -22,8 +22,8 @@
             <!-- everything you already have -->
             <ImageView
                 android:id="@+id/imageViewLogo"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="20dp"
@@ -31,116 +31,110 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/logo" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <EditText
-                android:id="@+id/textViewEmail"
+                android:id="@+id/editTextEmail"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/edit_text_style"
+                android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Inserisci l'email"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/textViewPassword"
+                android:id="@+id/editTextPassword"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/edit_text_style"
+                android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Inserisci la password"
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/textViewNome"
+                android:id="@+id/editTextNome"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/edit_text_style"
+                android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Nome"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/textViewCognome"
+                android:id="@+id/editTextCognome"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/edit_text_style"
+                android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Cognome"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/textViewNascita"
+                android:id="@+id/editTextNascita"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/edit_text_style"
+                android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Data di nascita"
                 android:inputType="datetime"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/textViewMatricola"
+                android:id="@+id/editTextMatricola"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:background="@drawable/edit_text_style"
+                android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Matricola"
                 android:inputType="numberDecimal"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
 
             <Button
                 android:id="@+id/buttonModifica"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="#0094FF"
                 android:text="Modifica"
-                android:textColor="#0094FF"
+                android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
