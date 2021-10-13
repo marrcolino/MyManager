@@ -13,6 +13,11 @@
             android:icon="@drawable/ic_account"
             android:title="@string/menu_account" />
         <item
+            android:id="@+id/nav_casiDiStudio"
+            android:icon="@drawable/ic_baseline_library_books_24"
+            android:title="@string/menu_casiDiStudio"
+            />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/menu_logout"

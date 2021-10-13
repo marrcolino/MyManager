@@ -27,8 +27,6 @@ public class AccountFragment extends Fragment {
 
     Button buttonModifica;
     EditText editTextEmail, editTextPassword, editTextNome, editTextCognome, editTextDataNascita, editTextMatricola;
-    ImageView imageViewLogo;
-    Drawable drawable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,10 +48,6 @@ public class AccountFragment extends Fragment {
                 startActivityForResult(intent,3);
             }
         });
-
-
-        imageViewLogo  = (ImageView)view.findViewById(R.id.imageViewLogo);
-        imageViewLogo.setImageDrawable(drawable);
 
         editTextEmail = (EditText)view.findViewById(R.id.editTextEmail);
         editTextEmail.setText(MainActivity.utenteLoggato.email);

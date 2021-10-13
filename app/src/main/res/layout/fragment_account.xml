@@ -42,7 +42,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="50dp"
                 android:shadowColor="#FFFFFF"
-                android:textColor="@color/black"
+                android:textColor="#0094FF"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"

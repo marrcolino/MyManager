@@ -17,6 +17,12 @@
         android:label="@string/menu_account"
         tools:layout="@layout/fragment_account" />
 
+    <fragment
+        android:id="@+id/nav_casiDiStudio"
+        android:name="com.example.mymanager.CasiDiStudioFragment"
+        android:label="@string/menu_casiDiStudio"
+        tools:layout="@layout/fragment_casi_di_studio" />
+
     <activity
         android:id="@+id/nav_logout"
         android:name="com.example.mymanager.MainActivity"
