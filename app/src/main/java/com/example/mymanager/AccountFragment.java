@@ -3,13 +3,16 @@ package com.example.mymanager;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -60,9 +63,15 @@ public class AccountFragment extends Fragment {
                         .setNegativeButton("Galleria", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                                startActivityForResult(intent,3);
-                                dialog.dismiss();
+                                if (ContextCompat.checkSelfPermission(AccountFragment.super.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                                    Toast.makeText(AccountFragment.super.getActivity(), "hai gia accettato", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                    startActivityForResult(intent,3);
+                                    dialog.dismiss();
+                                }else {
+                                    requestStoragePermission();
+                                }
+
                             }
                         }).create().show();
 
@@ -147,7 +156,29 @@ public class AccountFragment extends Fragment {
         return view;
     }
 
+    private void requestStoragePermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(AccountFragment.super.getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(AccountFragment.super.getActivity())
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of this and that")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog, int which){
+                            ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        }else {
+            ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        }
+    }
 
     /**
      * customizable toast
