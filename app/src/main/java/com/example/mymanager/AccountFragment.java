@@ -1,5 +1,7 @@
 package com.example.mymanager;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -7,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -24,7 +27,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class AccountFragment extends Fragment {
-
+    private  int STORAGE_PERMISSION_CODE = 1;
     Button buttonModifica;
     EditText editTextEmail, editTextPassword, editTextNome, editTextCognome, editTextDataNascita, editTextMatricola;
 
@@ -44,8 +47,25 @@ public class AccountFragment extends Fragment {
         buttonView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,3);
+                final AlertDialog alertDialog;
+                new AlertDialog.Builder(AccountFragment.super.getContext())
+                        .setTitle("Immagine mancante")
+                        .setMessage("Da dove vuoi prendere l'immagine per il tuo profilo?")
+                        .setPositiveButton("Camera", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                            }
+                        })
+                        .setNegativeButton("Galleria", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                startActivityForResult(intent,3);
+                                dialog.dismiss();
+                            }
+                        }).create().show();
+
             }
         });
 
