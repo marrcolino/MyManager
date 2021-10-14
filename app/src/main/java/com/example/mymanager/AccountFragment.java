@@ -1,22 +1,11 @@
 package com.example.mymanager;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -26,18 +15,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
-import static android.media.MediaRecorder.VideoSource.CAMERA;
+import static com.example.mymanager.Home.selectedImage;
 
 public class AccountFragment extends Fragment {
     private  int STORAGE_PERMISSION_CODE = 1;
     private  int CAMERA_CODE = 1;
     Button buttonModifica;
     EditText editTextEmail, editTextPassword, editTextNome, editTextCognome, editTextDataNascita, editTextMatricola;
+    ImageView logo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +83,9 @@ public class AccountFragment extends Fragment {
 
             }
         });
+
+        logo = view.findViewById(R.id.imageViewLogo);
+        logo.setImageURI(selectedImage);
 
         editTextEmail = (EditText)view.findViewById(R.id.editTextEmail);
         editTextEmail.setText(MainActivity.utenteLoggato.email);
