@@ -1,12 +1,14 @@
 package com.example.mymanager;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,8 +31,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.media.MediaRecorder.VideoSource.CAMERA;
+
 public class AccountFragment extends Fragment {
     private  int STORAGE_PERMISSION_CODE = 1;
+    private  int CAMERA_CODE = 1;
     Button buttonModifica;
     EditText editTextEmail, editTextPassword, editTextNome, editTextCognome, editTextDataNascita, editTextMatricola;
 
@@ -57,13 +62,22 @@ public class AccountFragment extends Fragment {
                         .setPositiveButton("Camera", new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which){
-                                ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                                //ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_CODE);
+                                if (ContextCompat.checkSelfPermission(AccountFragment.super.getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                                    Home.camera = true;
+                                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                    startActivityForResult(cameraIntent, 0);
+                                }else{
+                                    requestCameraPermission();
+                                }
+
                             }
                         })
                         .setNegativeButton("Galleria", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (ContextCompat.checkSelfPermission(AccountFragment.super.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                                    Home.galleria = true;
                                     Toast.makeText(AccountFragment.super.getActivity(), "hai gia accettato", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                     startActivityForResult(intent,3);
@@ -156,19 +170,42 @@ public class AccountFragment extends Fragment {
         return view;
     }
 
+    private void requestCameraPermission(){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(AccountFragment.super.getActivity(),Manifest.permission.CAMERA)){
+            new AlertDialog.Builder(AccountFragment.super.getActivity())
+                    .setTitle("Permesso necessario")
+                    .setMessage("Questo permesso non è ancora stato accettato")
+                    .setPositiveButton("Accetta", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog, int which){
+                            ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_CODE);
+
+                        }
+                    })
+                    .setNegativeButton("Rifiuta", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        }else {
+            ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_CODE);
+        }
+    }
     private void requestStoragePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(AccountFragment.super.getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)){
             new AlertDialog.Builder(AccountFragment.super.getActivity())
-                    .setTitle("Permission needed")
-                    .setMessage("This permission is needed because of this and that")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener(){
+                    .setTitle("Permesso necessario")
+                    .setMessage("Questo permesso non è ancora stato accettato")
+                    .setPositiveButton("Accetta", new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which){
                             ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
                         }
                     })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("Rifiuta", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -187,4 +224,5 @@ public class AccountFragment extends Fragment {
     private void toastMessage(String message){
         Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
     }
+
 }

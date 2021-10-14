@@ -1,8 +1,11 @@
 package com.example.mymanager;
 
+import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -24,10 +27,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.io.ByteArrayOutputStream;
+
 public class Home extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
+    private Integer ACTION_REQUEST_GALLERY=1889;
+    private Integer ACTION_REQUEST_CAMERA=1888;
+    public static Boolean camera = false;
+    public static Boolean galleria = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +85,25 @@ public class Home extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && data != null){
-            Uri selectedImage = data.getData();
-            ImageView imageView =findViewById(R.id.imageViewLogo);
-            imageView.setImageURI(selectedImage);
-        }
+
+            Log.i(" "+String.valueOf(requestCode)+ resultCode,"Richiesta");
+            if(resultCode == RESULT_OK && data != null){
+                if (Home.galleria == true) {
+                    Uri selectedImage = data.getData();
+                    ImageView imageView =findViewById(R.id.imageViewLogo);
+                    imageView.setImageURI(selectedImage);
+                    Home.galleria = false;
+                }else if(Home.camera == true){
+                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                    String path = MediaStore.Images.Media.insertImage(Home.this.getContentResolver(), photo, "Title", null);
+                    ImageView imageView =findViewById(R.id.imageViewLogo);
+                    imageView.setImageURI(Uri.parse(path));
+                    Home.camera = false;
+                }
+            }
+
     }
+
 }
