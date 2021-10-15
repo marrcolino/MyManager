@@ -12,6 +12,7 @@ public class User {
     public static String password;
     public static String dataNascita;
 
+
     public User(){
         this.fotoProfilo=fotoProfilo;
         this.matricola=matricola;

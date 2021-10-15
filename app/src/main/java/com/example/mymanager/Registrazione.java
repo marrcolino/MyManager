@@ -66,11 +66,11 @@ public class Registrazione extends AppCompatActivity {
                 }
                 if(cognome.isEmpty()){
                     campiVuoti = true;
-                    editTextCognome.setError("Riempire il campo!");
+                    editTextCognome.setError("Riempire il campo! ");
                 }
                 if(dataNascita.isEmpty()){
                     campiVuoti = true;
-                    editTextDataNascita.setError("Riempire il campo!");
+                    editTextDataNascita.setError("Riempire il campo! ");
                 }
                 if(matricola.isEmpty()){
                     campiVuoti = true;

@@ -37,12 +37,14 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        //TESTO SOTTOLINEATO
+
+        //TESTO SOTTOLINEATOO
         Button buttonView = (Button) view.findViewById(R.id.textViewCambiaImg);
         SpannableString content = new SpannableString( "Cambia immagine del profilo" );
         content.setSpan( new UnderlineSpan() , 0 , content.length() , 0 );
         buttonView.setBackgroundColor(Color.WHITE);
         buttonView.setText(content);
+
 
         buttonView.setOnClickListener(new View.OnClickListener(){
             @Override
