@@ -54,6 +54,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return result!= -1;
     }
 
+    public Boolean insertCasoDiStudio(String nome ,String descrizione , String esame, String matricolaProfessore) {
+        Long result;
+
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nome", nome);
+        contentValues.put("descrizione", descrizione);
+        contentValues.put("esame", esame);
+        contentValues.put("matricolaProfessore", matricolaProfessore);
+        result = DB.insert("CasoDiStudio", null, contentValues);
+
+        return result!= -1;
+    }
+
     public Boolean updateUserData(String matricola ,String nome , String cognome , String email , String password , String dataNascita ) {
         int result;
         if (matricola.charAt(0) != '0') {

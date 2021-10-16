@@ -5,10 +5,56 @@
     android:layout_height="match_parent"
     tools:context=".CasiDiStudioFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-48dp">
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="0,1"
+            android:gravity="center">
+
+            <TableRow
+                android:background="#FFFFFF"
+                android:layout_width="fill_parent"
+                android:layout_margin="1dp"
+                android:layout_weight="0">
+
+                <ImageButton
+                    android:id="@+id/buttonCreaCaso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:backgroundTint="#0094FF"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_add_24"/>
+
+                <ImageButton
+                    android:id="@+id/buttonBoh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:backgroundTint="#0094FF"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_format_list_bulleted_24"/>
+            </TableRow>
+
+            <TableRow
+                android:background="#FFFFFF"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+
+
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
 
 </FrameLayout>

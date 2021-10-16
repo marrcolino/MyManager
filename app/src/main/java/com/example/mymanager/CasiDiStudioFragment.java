@@ -1,5 +1,6 @@
 package com.example.mymanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +61,45 @@ public class CasiDiStudioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_casi_di_studio, container, false);
+        View view = inflater.inflate(R.layout.fragment_casi_di_studio, container, false);
+
+        // TODO Auto-generated method stub
+        ImageButton btn = (ImageButton) view.findViewById(R.id.buttonCreaCaso);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CreaCasoDiStudio.class));
+
+                /*
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                Fragment fragment = new CreaCasoDiStudioFragment();
+                Fragment fragment1 = new CasiDiStudioFragment();
+                Fragment fragmentOld = fragmentManager.findFragmentById(R.id.nav_host_fragment);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
+                /*fragmentTransaction.replace(R.id.nav_host_fragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                fragmentTransaction.remove(fragment1);
+                fragmentTransaction.commit();*/
+
+                /*fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.remove(fragmentOld);
+                fragmentTransaction.commit();*/
+
+                /*CreaCasoDiStudioFragment nextFrag= new CreaCasoDiStudioFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment, nextFrag, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();*/
+
+                //toastMessage("Click");
+            }
+        });
+
+        return view;
     }
 }
