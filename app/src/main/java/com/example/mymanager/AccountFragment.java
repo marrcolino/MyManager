@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.SpannableString;
@@ -21,6 +22,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
 
 import static com.example.mymanager.Home.selectedImage;
 
@@ -87,7 +91,12 @@ public class AccountFragment extends Fragment {
         });
 
         logo = view.findViewById(R.id.imageViewLogo);
-        logo.setImageURI(selectedImage);
+        Home.profile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(logo);
+            }
+        });
 
         editTextEmail = (EditText)view.findViewById(R.id.editTextEmail);
         editTextEmail.setText(MainActivity.utenteLoggato.email);

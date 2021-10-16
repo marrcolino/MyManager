@@ -31,12 +31,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
 
 public class Home extends AppCompatActivity {
 
+    public static StorageReference profile;
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private AppBarConfiguration mAppBarConfiguration;
@@ -77,8 +79,8 @@ public class Home extends AppCompatActivity {
         Name_nav.setText(MainActivity.utenteLoggato.nome + " " + MainActivity.utenteLoggato.cognome);
         Email_nav.setText(MainActivity.utenteLoggato.email);
 
-        storage= FirebaseStorage.getInstance();
-        storageReference= storage.getReference();
+        storageReference= FirebaseStorage.getInstance().getReference();
+        updateNavHeader();
     }
 
     @Override
@@ -125,7 +127,7 @@ public class Home extends AppCompatActivity {
         pd.show();
 
         final String randomkey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("fotoProfilo/" + MainActivity.utenteLoggato.matricola);
+        StorageReference riversRef = storageReference.child("fotoProfilo/" + MainActivity.utenteLoggato.matricola+ ".jpg");
 
         riversRef.putFile(selectedImage)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -157,6 +159,28 @@ public class Home extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         ImageView navUserPhoto = headerView.findViewById(R.id.imageViewIcon);
+
+        // Create a reference to a file from a Google Cloud Storage URI
+        //
+        // Reference to an image file in Cloud
+
+        profile = storageReference.child("/fotoProfilo/"+ MainActivity.utenteLoggato.matricola+ ".jpg");
+        profile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(navUserPhoto);
+            }
+        });
+// Load the image using Glide
+        // Glide.with(this).load(storageReference).into(navUserPhoto);
+        toastMessage(storageReference.toString());
+
+        /*StorageReference gsReference = storage.getReferenceFromUrl("gs://fotoProfilo/"+ MainActivity.utenteLoggato.matricola+".jpg");
+        Glide.with(this).load().into(navUserPhoto);*/
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
 }
