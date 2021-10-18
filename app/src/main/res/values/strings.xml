@@ -10,6 +10,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_account">Account</string>
+    <string name="menu_gruppi">Gruppi</string>
     <string name="menu_casiDiStudio">Casi di studio</string>
     <string name="menu_logout">Logout</string>
     <!-- TODO: Remove or change this placeholder text -->

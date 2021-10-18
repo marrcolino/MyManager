@@ -68,6 +68,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return result!= -1;
     }
 
+    public Boolean insertGruppo(String nomeGruppo, String partCreatore, String part2, String part3, String part4) {
+        Long result;
+
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nome", nomeGruppo);
+        contentValues.put("matricolaPartecipante1", partCreatore);
+        contentValues.put("matricolaPartecipante2", part2);
+        contentValues.put("matricolaPartecipante3", part3);
+        contentValues.put("matricolaPartecipante4", part4);
+        result = DB.insert("Gruppo", null, contentValues);
+
+        return result!= -1;
+    }
+
     public Boolean updateUserData(String matricola ,String nome , String cognome , String email , String password , String dataNascita ) {
         int result;
         if (matricola.charAt(0) != '0') {

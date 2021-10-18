@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreaGruppo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-48dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <EditText
+                android:id="@+id/editTextNomeGruppo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci il nome del gruppo"
+                android:inputType="text"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextPart2"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci la matricola dello studente"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextPart3"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci la matricola dello studente"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextPart4"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci la matricola dello studente"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/buttonCreaGruppo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="#0094FF"
+                android:text="Crea gruppo"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+        </TableLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

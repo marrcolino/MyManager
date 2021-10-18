@@ -1,6 +1,7 @@
 package com.example.mymanager;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,14 +41,12 @@ import java.util.UUID;
 public class Home extends AppCompatActivity {
 
     public static StorageReference profile;
-    private FirebaseStorage storage;
     private StorageReference storageReference;
     private AppBarConfiguration mAppBarConfiguration;
-    private Integer ACTION_REQUEST_GALLERY=1889;
-    private Integer ACTION_REQUEST_CAMERA=1888;
     public static Boolean camera = false;
     public static Boolean galleria = false;
     public static Uri selectedImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +66,7 @@ public class Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_account, R.id.nav_casiDiStudio, R.id.nav_logout)
+                R.id.nav_home, R.id.nav_account, R.id.nav_gruppi, R.id.nav_casiDiStudio, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -81,12 +81,28 @@ public class Home extends AppCompatActivity {
 
         storageReference= FirebaseStorage.getInstance().getReference();
         updateNavHeader();
+
+        //LOGIN STUDENTE
+        if(MainActivity.utenteLoggato.matricola.charAt(0) != '0')
+        {
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_casiDiStudio).setVisible(false);
+        }
+        else//LOGIN PROFESSORE
+        {
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_gruppi).setVisible(false);
+            toastMessage("ci sono");
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+
         return true;
     }
 
@@ -171,12 +187,6 @@ public class Home extends AppCompatActivity {
                 Picasso.get().load(uri).into(navUserPhoto);
             }
         });
-// Load the image using Glide
-        // Glide.with(this).load(storageReference).into(navUserPhoto);
-        toastMessage(storageReference.toString());
-
-        /*StorageReference gsReference = storage.getReferenceFromUrl("gs://fotoProfilo/"+ MainActivity.utenteLoggato.matricola+".jpg");
-        Glide.with(this).load().into(navUserPhoto);*/
     }
 
     private void toastMessage(String message){
