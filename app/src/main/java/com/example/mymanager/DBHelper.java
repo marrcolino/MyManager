@@ -134,8 +134,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-   /* public Cursor readAllData(){
-        String query = "SELECT * FROM Userdetails " + null;
+    public Cursor listaCasiDiStudio(String matricola){
+        String query = "select * from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
         SQLiteDatabase DB = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -143,5 +143,5 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = DB.rawQuery(query, null);
         }
         return cursor;
-    }*/
+    }
 }

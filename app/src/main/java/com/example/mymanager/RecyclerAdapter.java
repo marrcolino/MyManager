@@ -1,5 +1,6 @@
 package com.example.mymanager;
 
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
         //holder.Id_input.setText(String.valueOf(list.get(position).getCasi()));
-        holder.TextId.setText(list.get(position).getId());
-        holder.TextCasodistudio.setText(list.get(position).getCasiDiStudio());
-        holder.TextCorso.setText(list.get(position).getCorso());
-        holder.TextNomeprof.setText(list.get(position).getNomeProf());
+        //holder.TextId.setText(list.get(position).getId());
+        /*Cursor cursor = MainActivity.DB.listaCasiDiStudio(MainActivity.utenteLoggato.matricola);
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()) {
+                holder.TextCasodistudio.setText(cursor.getString(0));
+                holder.TextCorso.setText(cursor.getString(3));
+                holder.TextNomeprof.setText(cursor.getString(4));
+            }
+        }*/
+        holder.TextCasodistudio.setText(list.get(position).getNome());
+        holder.TextCorso.setText(list.get(position).getEsame());
+        holder.TextNomeprof.setText(list.get(position).getMatricolaProfessore());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

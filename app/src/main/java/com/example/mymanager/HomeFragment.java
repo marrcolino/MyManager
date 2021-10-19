@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -53,15 +54,34 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
     }
 
     private void buildListData(){
-        list.add(new Casi("234","MyManager","Android","Zorro"));
-        list.add(new Casi("1234","AppOne","Modelli","Belen"));
-        list.add(new Casi("5646","RealMe","PIU","Onorevole"));
+        //LISTA CASI DI STUDIO DELL'UTENTE LOGGATO
+        Cursor cursor = MainActivity.DB.listaCasiDiStudio(MainActivity.utenteLoggato.matricola);
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()) {
+                list.add(new Casi(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4)));
+            }
+        }
+        /*for(int i = 1; i<=cursor.getCount(); i++)
+        {
+            cursor.move(i);
+            list.add(new Casi(
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4)));
+        }*/
     }
 
     @Override
     public void onItemClick(Casi casi) {
 
-        Fragment fragment = DettaglioFragment.newInstance(casi.getId(), casi.getCasiDiStudio());
+        Fragment fragment = DettaglioFragment.newInstance(casi.getId(), casi.getNome());
         FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_fragment, fragment, "DettaglioFragment");
         transaction.addToBackStack(null);
@@ -69,4 +89,11 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
 
     }
 
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
+    }
 }

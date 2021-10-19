@@ -10,39 +10,49 @@ public class Casi {
             this.id = id;
         }
 
-        public String getCasiDiStudio() {
-            return casiDiStudio;
+        public String getNome() {
+            return nome;
         }
 
-        public void setCasiDiStudio(String casiDiStudio) {
-            this.casiDiStudio = casiDiStudio;
+        public void setNome(String nome) {
+            this.nome = nome;
         }
 
-        public String getCorso() {
-            return corso;
+        public String getDescrizione() {
+            return descrizione;
         }
 
-        public void setCorso(String corso) {
-            this.corso = corso;
+        public void setDescrizione(String descrizione) {
+            this.descrizione = descrizione;
         }
 
-        public String getNomeProf() {
-            return nomeProf;
+        public String getEsame() {
+            return esame;
         }
 
-        public void setNomeProf(String nomeProf) {
-            this.nomeProf = nomeProf;
+        public void setEsame(String esame) {
+            this.esame = esame;
         }
 
-        public Casi(String id, String casiDiStudio, String corso, String nomeProf) {
+        public String getMatricolaProfessore() {
+            return matricolaProfessore;
+        }
+
+        public void setMatricolaProfesssore(String matricolaProfessore) {
+            this.matricolaProfessore = matricolaProfessore;
+        }
+
+        public Casi(String id, String nome, String descrizione, String esame, String matricolaProfessore) {
             this.id = id;
-            this.casiDiStudio = casiDiStudio;
-            this.corso = corso;
-            this.nomeProf = nomeProf;
+            this.nome = nome;
+            this.descrizione = descrizione;
+            this.esame = esame;
+            this.matricolaProfessore = matricolaProfessore;
         }
 
-        private String id;
-        private String casiDiStudio;
-        private String corso;
-        private String nomeProf;
+        private static String id;
+        private static String nome;
+        private static String descrizione;
+        private static String esame;
+        private static String matricolaProfessore;
 }
