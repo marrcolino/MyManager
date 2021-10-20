@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
                         }else {
                             while(cursor.moveToNext()) {
 
-                           MainActivity.utenteLoggato.matricola=cursor.getString(0);
+                            MainActivity.utenteLoggato.matricola=cursor.getString(0);
                             MainActivity.utenteLoggato.nome=cursor.getString(1);
                             MainActivity.utenteLoggato.cognome=cursor.getString(2);
                             MainActivity.utenteLoggato.email=cursor.getString(3);

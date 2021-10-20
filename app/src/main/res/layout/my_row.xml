@@ -6,67 +6,44 @@
     android:layout_height="wrap_content">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="12dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/TextCasodistudio"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:text="Caso di Studio 1"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TextCorso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Corso"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextCasodistudio" />
+
+        <TextView
+            android:id="@+id/TextNomeprof"
+            android:layout_width="119dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:text="Nome Prof."
+            app:layout_constraintLeft_toRightOf="@+id/TextCasodistudio"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="267dp"
+            tools:layout_editor_absoluteY="2dp" />
 
 
-            <TextView
-                android:id="@+id/TextId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="12dp"
-                tools:layout_editor_absoluteY="12dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:id="@+id/TextCasodistudio"
-                android:layout_width="145dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="30dp"
-                android:text="Caso di Studio 1"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/TextId"
-                tools:layout_editor_absoluteX="53dp"
-                android:layout_marginLeft="30dp" />
-
-            <TextView
-                android:id="@+id/TextCorso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/TextCasodistudio"
-                app:layout_constraintLeft_toRightOf="@+id/TextId"
-                android:text="Corso"
-                android:textSize="15dp"
-                android:layout_marginStart="30dp"
-                tools:layout_editor_absoluteX="54dp"
-                tools:layout_editor_absoluteY="44dp"
-                android:layout_marginLeft="30dp" />
-
-            <TextView
-                android:id="@+id/TextNomeprof"
-                android:layout_width="119dp"
-                android:layout_height="30dp"
-                android:text="Nome Prof."
-                tools:layout_editor_absoluteX="267dp"
-                tools:layout_editor_absoluteY="2dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/TextCasodistudio"
-                android:layout_marginStart="70dp"
-                android:layout_marginLeft="70dp" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

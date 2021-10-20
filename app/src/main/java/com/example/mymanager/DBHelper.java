@@ -123,19 +123,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor getData(String matricola){
-        Cursor cursor;
-        SQLiteDatabase DB = this.getWritableDatabase();
-        if(matricola.charAt(0)!='0'){
-             cursor = DB.rawQuery("Select * FROM Studente WHERE matricola = '"+matricola+"'",null);
-        }else{
-             cursor = DB.rawQuery("Select * FROM Professore WHERE matricola = '"+matricola+"'" ,null);
-        }
-        return cursor;
-    }
-
     public Cursor listaCasiDiStudio(String matricola){
-        String query = "select * from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
+        String query = "select CasoDiStudio.*, Professore.nome from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID INNER JOIN Professore on CasoDiStudio.matricolaProfessore = Professore.matricola where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
         SQLiteDatabase DB = this.getReadableDatabase();
 
         Cursor cursor = null;
