@@ -94,7 +94,6 @@ public class Home extends AppCompatActivity {
             navigationView = (NavigationView) findViewById(R.id.nav_view);
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_crea_gruppi).setVisible(false);
-            toastMessage("ci sono");
         }
     }
 

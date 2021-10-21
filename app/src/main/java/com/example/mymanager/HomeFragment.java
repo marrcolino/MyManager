@@ -60,11 +60,8 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
 
     private void buildListData(){
         //LISTA CASI DI STUDIO DELL'UTENTE LOGGATO
-        Cursor cursor = MainActivity.DB.listaCasiDiStudio(MainActivity.utenteLoggato.matricola);
-
-        if(MainActivity.utenteLoggato.matricola.charAt(0)=='0') {
-             cursor = MainActivity.DB.listaCasiProf(MainActivity.utenteLoggato.matricola);
-        }else {
+        if(MainActivity.utenteLoggato.matricola.charAt(0)!='0') {
+            Cursor cursor = MainActivity.DB.listaCasiDiStudio(MainActivity.utenteLoggato.matricola);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     List<String> arrlist = new ArrayList<String>();
@@ -77,8 +74,21 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
                     list.add(arrlist);
                 }
             }
+        }else
+        {
+            Cursor cursor = MainActivity.DB.listaCasiProf(MainActivity.utenteLoggato.matricola);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    List<String> arrlist = new ArrayList<String>();
+                    arrlist.add(cursor.getString(0));
+                    arrlist.add(cursor.getString(1));
+                    arrlist.add(cursor.getString(2));
+                    arrlist.add(cursor.getString(3));
+                    arrlist.add(cursor.getString(4));
+                    list.add(arrlist);
+                }
+            }
         }
-
     }
 
     @Override
@@ -88,9 +98,17 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
         transaction.replace(R.id.nav_host_fragment, fragment, "DettaglioFragment");
         transaction.addToBackStack(null);
         transaction.commit();*/
-        Intent i = new Intent(getActivity(), InfoCasoDiStudio.class);
-        i.putExtra("key", Integer.toString((position)));
-        startActivity(i);
+        if(MainActivity.utenteLoggato.matricola.charAt(0)!='0') {
+            Intent i = new Intent(getActivity(), InfoCasoDiStudio.class);
+            i.putExtra("key", Integer.toString((position)));
+            startActivity(i);
+        }
+        else
+        {
+            Intent i = new Intent(getActivity(), InfoProfCasoDiStudio.class);
+            i.putExtra("key", Integer.toString((position)));
+            startActivity(i);
+        }
     }
 
     /**

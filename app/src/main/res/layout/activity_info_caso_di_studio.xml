@@ -6,12 +6,83 @@
     android:layout_height="match_parent"
     tools:context=".InfoCasoDiStudio">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="104dp"
-        tools:ignore="MissingConstraints" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <!-- everything you already have -->
+
+            <TextView
+                android:id="@+id/textViewNomeCaso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome caso di studio"
+                android:textColor="@color/blue_app"
+                android:textSize="25dp"
+                android:padding="10dp"
+                android:layout_margin="20dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewEsame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome esame"
+                android:textColor="@color/blue_app"
+                android:textSize="15dp"
+                android:padding="10dp"
+                android:layout_margin="20dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewProf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome prof"
+                android:textColor="@color/blue_app"
+                android:textSize="15dp"
+                android:padding="10dp"
+                android:layout_margin="20dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewDescrizione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrizione : dhnasfgpoèbhgiudiphjsgggbfgdijphgfikjnhbogfnbopgfdbjghnpèghn gmhlkpmngohkpmnokpghnmgèhmngèhinjmgdh"
+                android:textColor="@color/blue_app"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:layout_margin="20dp"
+                />
+
+            <Button
+                android:id="@+id/buttonIscriviti"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="iscriviti"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/buttonCancIscrizione"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="Abbandona"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+        </TableLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoProfCasoDiStudio">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <!-- everything you already have -->
+
+            <Button
+                android:id="@+id/buttonListaGruppi"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="lista gruppi iscritti"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/editTextModNomeCaso"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Modifica nome caso di studio"
+                android:inputType="text"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextModNomeEsame"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Modifica nome esame"
+                android:inputType="text"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextModDescrizione"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Modifica informazioni sul caso di studio"
+                android:inputType="textMultiLine"
+                android:gravity="top|start"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:scrollbars="vertical"/>
+
+            <Button
+                android:id="@+id/buttonSalvaModifiche"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="salva modifiche"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/buttonEliminaCasoDiStudio"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="elimina caso di studio"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+        </TableLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -110,6 +110,28 @@ public class DBHelper extends SQLiteOpenHelper {
         return result!= -1;
     }
 
+    public Boolean updateInfoProfCasiDiStudio(String id, String nome ,String descrizione , String esame) {
+        int result;
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nome", nome);
+        contentValues.put("descrizione", descrizione);
+        contentValues.put("esame", esame);
+        //long result = DB.update("Userdetails", contentValues, "name=?", new String[]{name});
+        result = DB.update("CasoDiStudio", contentValues, "id=?", new String[]{id});
+        return result!= -1;
+    }
+
+    public Boolean deleteCasoDiStudio(String id){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        long result = DB.delete("CasoDiStudio",  "id=?", new String[]{id});
+        if (result == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Cursor login (String matricola, String password){
         Cursor cursor;
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -150,7 +172,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor listaCasiProf(String matricola) {
 
-        String query = " SELECT * FROM CasoDiStudio WHERE matricolaProfessore = "+ matricola +"";
+        String query = "SELECT * FROM CasoDiStudio WHERE matricolaProfessore = '"+ matricola +"'";
 
         SQLiteDatabase DB = this.getReadableDatabase();
 

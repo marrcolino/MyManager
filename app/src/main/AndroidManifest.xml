@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyManager">
-        <activity android:name=".InfoGruppo"></activity>
+        <activity android:name=".InfoProfCasoDiStudio"></activity>
+        <activity android:name=".InfoGruppo" />
         <activity android:name=".InfoCasoDiStudio" />
         <activity android:name=".CreaGruppo" />
         <activity android:name=".CreaCasoDiStudio" />
