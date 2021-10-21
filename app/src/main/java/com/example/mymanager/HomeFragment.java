@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    //private ArrayList<Casi> list = new ArrayList<>();
+    private RecyclerAdapter adapter;
     private ArrayList<List> list = new ArrayList<List>();
 
     @Override
@@ -50,29 +50,35 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
 
     private void initRecyclerView(View view) {
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+         recyclerView = view.findViewById(R.id.recyclerview);
+         layoutManager = new LinearLayoutManager(getActivity());
 
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerAdapter adapter = new RecyclerAdapter(list, this);
+        adapter = new RecyclerAdapter(list, this);
         recyclerView.setAdapter(adapter);
     }
 
     private void buildListData(){
         //LISTA CASI DI STUDIO DELL'UTENTE LOGGATO
         Cursor cursor = MainActivity.DB.listaCasiDiStudio(MainActivity.utenteLoggato.matricola);
-        if(cursor.getCount()>0){
-            while (cursor.moveToNext()) {
-                List<String> arrlist = new ArrayList<String>();
-                arrlist.add(cursor.getString(0));
-                arrlist.add(cursor.getString(1));
-                arrlist.add(cursor.getString(2));
-                arrlist.add(cursor.getString(3));
-                arrlist.add(cursor.getString(4));
-                arrlist.add(cursor.getString(5));
-                list.add(arrlist);
+
+        if(MainActivity.utenteLoggato.matricola.charAt(0)=='0') {
+             cursor = MainActivity.DB.listaCasiProf(MainActivity.utenteLoggato.matricola);
+        }else {
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    List<String> arrlist = new ArrayList<String>();
+                    arrlist.add(cursor.getString(0));
+                    arrlist.add(cursor.getString(1));
+                    arrlist.add(cursor.getString(2));
+                    arrlist.add(cursor.getString(3));
+                    arrlist.add(cursor.getString(4));
+                    arrlist.add(cursor.getString(5));
+                    list.add(arrlist);
+                }
             }
         }
+
     }
 
     @Override

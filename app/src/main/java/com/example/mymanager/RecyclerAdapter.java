@@ -48,8 +48,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 clicklistener.onItemClick(list.get(position), position);
             }
         });
-
-
     }
 
     @Override

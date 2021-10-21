@@ -133,4 +133,33 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public Cursor listaGruppi(String matricola) {
+
+        String query = " SELECT Gruppo.* FROM Gruppo WHERE Gruppo.matricolaPartecipante1 = " + matricola + "  OR Gruppo.matricolaPartecipante2 = " + matricola + "  OR Gruppo.matricolaPartecipante3 = " + matricola + "  OR Gruppo.matricolaPartecipante4 = " + matricola + "";
+
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
+
+    }
+
+    public Cursor listaCasiProf(String matricola) {
+
+        String query = " SELECT * FROM CasoDiStudio WHERE matricolaProfessore = "+ matricola +"";
+
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
+
+    }
+
 }
