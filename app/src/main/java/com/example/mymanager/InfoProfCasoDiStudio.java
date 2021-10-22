@@ -63,7 +63,10 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
                 Gruppi_iscrittiFragment fragobj = new Gruppi_iscrittiFragment();
                 fragobj.setArguments(bundle);*/
 
-                startActivity(new Intent(InfoProfCasoDiStudio.this ,Lista_gruppi_iscritti.class));
+                Intent i = new Intent(InfoProfCasoDiStudio.this, Lista_gruppi_iscritti.class);
+                i.putExtra("key", list.get(position).get(0).toString());
+                startActivity(i);
+                //startActivity(new Intent(InfoProfCasoDiStudio.this ,Lista_gruppi_iscritti.class));
             }
         });
 

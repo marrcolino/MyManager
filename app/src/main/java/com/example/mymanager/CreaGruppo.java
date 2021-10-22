@@ -59,10 +59,19 @@ public class CreaGruppo extends AppCompatActivity {
 
                 if (!campiVuoti) {
 
+                    //toastMessage(part3 + " " + part4);
+                    if(part3.isEmpty())
+                    {
+                        part3 = "vuoto";
+                    }
+                    if(part4.isEmpty())
+                    {
+                        part4 = "vuoto";
+                    }
                     boolean insertUser = MainActivity.DB.insertGruppo(nome, partCreatore, part2, part3, part4);
 
                     if (insertUser) {
-                        toastMessage("Creazione gruppo completata!");
+                        toastMessage("Creazione gruppo completata!" + part3 + " " + part4);
                         editTextNome.setText("");
                         editTextPart2.setText("");
                         editTextPart3.setText("");

@@ -184,9 +184,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor listaGruppiProf(String matricola) {
+    public Cursor listaGruppiIscritti(String id) {
 
-        String query = "SELECT * FROM CasoDiStudio WHERE matricolaProfessore = '"+ matricola +"'";
+        String query = "SELECT * FROM Gruppo WHERE IDCasoStudio = '"+ id +"'";
 
         SQLiteDatabase DB = this.getReadableDatabase();
 
@@ -195,7 +195,19 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = DB.rawQuery(query, null);
         }
         return cursor;
+    }
 
+    public Cursor listaInfoStudentiGruppiIscritti(String matricola) {
+
+        String query = "SELECT nome, cognome, email FROM Studente WHERE matricola = '"+ matricola +"'";
+
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
     }
 
 }
