@@ -3,6 +3,9 @@ package com.example.mymanager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,9 +50,20 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
         buttonListaGruppi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(InfoProfCasoDiStudio.this, InfoCasoDiStudio.class);//AGGIORNARE CON PAGINA NUOVA
-                i.putExtra("key", list.get(position).get(0).toString());
-                startActivity(i);
+
+               /* FragmentManager fragmentManager =  getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment map = new Gruppi_iscrittiFragment();
+                fragmentTransaction.add(R.id.nav_host_fragment, map);
+                fragmentTransaction.commit();
+
+               /* Bundle bundle = new Bundle();
+                bundle.putString("key", "prova");
+                // set Fragmentclass Arguments
+                Gruppi_iscrittiFragment fragobj = new Gruppi_iscrittiFragment();
+                fragobj.setArguments(bundle);*/
+
+                startActivity(new Intent(InfoProfCasoDiStudio.this ,Lista_gruppi_iscritti.class));
             }
         });
 

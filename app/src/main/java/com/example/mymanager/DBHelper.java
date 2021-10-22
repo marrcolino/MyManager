@@ -184,4 +184,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor listaGruppiProf(String matricola) {
+
+        String query = "SELECT * FROM CasoDiStudio WHERE matricolaProfessore = '"+ matricola +"'";
+
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
+
+    }
+
 }

@@ -68,4 +68,6 @@ public class ListaGruppiFragment extends Fragment implements RecyclerAdapterGrup
         e.putExtra("key2", Integer.toString((position)));
         startActivity(e);
     }
+
+
 }
