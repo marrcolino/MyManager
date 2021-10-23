@@ -1,11 +1,14 @@
 package com.example.mymanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,6 +28,13 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_gruppi_iscritti);
 
+        //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Gruppi iscritti al caso di studio </font>"));
+        // Customize the back button
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        // showing the back button in action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         buildListData();
 
         recyclerView = findViewById(R.id.recyclerview);
@@ -36,19 +46,6 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
     }
 
     private void buildListData(){
-        //LISTA CASI DI STUDIO DELL'UTENTE LOGGATO
-        /*Cursor cursor = MainActivity.DB.listaCasiProf(MainActivity.utenteLoggato.matricola);
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                List<String> arrlist = new ArrayList<String>();
-                arrlist.add(cursor.getString(0));
-                arrlist.add(cursor.getString(1));
-                arrlist.add(cursor.getString(2));
-                arrlist.add(cursor.getString(3));
-                arrlist.add(cursor.getString(4));
-                list.add(arrlist);
-            }
-        }*/
         String idCaso = "";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -59,7 +56,6 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
         Cursor cursor = MainActivity.DB.listaGruppiIscritti(idCaso);
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                Cursor cursorInfo = null;
                 List<String> arrlist = new ArrayList<String>();
                 arrlist.add(cursor.getString(0));
                 arrlist.add(cursor.getString(1));
@@ -69,30 +65,8 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
                 arrlist.add(cursor.getString(5));
                 arrlist.add(cursor.getString(6));
                 list.add(arrlist);
-
-                /*for(int i = 2; i<6; i++)
-                {
-                    cursorInfo = null;
-                    cursorInfo = MainActivity.DB.listaInfoStudentiGruppiIscritti(cursor.getString(i));
-                    if (cursorInfo.getCount() > 0) {
-                        while (cursorInfo.moveToNext()) {
-                            List<String> arrlistInfo = new ArrayList<String>();
-                            arrlistInfo.add(cursorInfo.getString(0));
-                            arrlistInfo.add(cursorInfo.getString(1));
-                            arrlistInfo.add(cursorInfo.getString(2));
-                            listInfo.add(arrlistInfo);
-                        }
-                    }
-
-                }*/
-
             }
         }
-        /*
-        toastMessage(listInfo.get(0).get(0) + " " + listInfo.get(0).get(1) + " " + listInfo.get(0).get(2));
-        toastMessage(listInfo.get(1).get(0) + " " + listInfo.get(1).get(1) + " " + listInfo.get(1).get(2));
-        toastMessage(listInfo.get(2).get(0) + " " + listInfo.get(2).get(1) + " " + listInfo.get(2).get(2));
-        toastMessage(listInfo.get(3).get(0) + " " + listInfo.get(3).get(1) + " " + listInfo.get(3).get(2));*/
     }
 
 
@@ -103,5 +77,17 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

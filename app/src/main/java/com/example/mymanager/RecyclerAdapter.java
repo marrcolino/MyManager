@@ -34,16 +34,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
-        //holder.Id_input.setText(String.valueOf(list.get(position).getCasi()));
-        holder.TextCasodistudio.setText(list.get(position).get(1).toString());
-        holder.TextCorso.setText(list.get(position).get(3).toString());
-        if(MainActivity.utenteLoggato.matricola.charAt(0)!='0')
+        if(list.isEmpty())
         {
-            holder.TextNomeprof.setText(list.get(position).get(5).toString());
+            holder.TextCasodistudio.setText("Nessun caso di studio trovato!");
+
         }
-        /*holder.TextCasodistudio.setText(list.get(position).getNome());
-        holder.TextCorso.setText(list.get(position).getEsame());
-        holder.TextNomeprof.setText(list.get(position).getMatricolaProfessore());*/
+        else
+        {
+            holder.TextCasodistudio.setText(list.get(position).get(1).toString());
+            holder.TextCorso.setText(list.get(position).get(3).toString());
+            if(MainActivity.utenteLoggato.matricola.charAt(0)!='0')
+            {
+                holder.TextNomeprof.setText(list.get(position).get(5).toString());
+            }
+            else
+            {
+                holder.TextNomeprof.setVisibility(View.GONE);
+            }
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

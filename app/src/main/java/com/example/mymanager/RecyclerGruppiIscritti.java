@@ -44,39 +44,17 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.textViewNomeGruppo.setText(list.get(position).get(1).toString());
-        /*if(position > 1)
-        {
-            positionInfo0+=4;
-            positionInfo1+=4;
-            positionInfo2+=4;
-            positionInfo3+=4;
-            holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-            holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-            holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
-            holder.textViewPart4.setText(list.get(position).get(5).toString() + " " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()+ " " + listInfo.get(positionInfo3).get(2).toString());
-        }
-        else
-        {
-            //PRiMA VOLTA
-            holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-            holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-            holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
-            holder.textViewPart4.setText(list.get(position).get(5).toString() + " " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()+ " " + listInfo.get(positionInfo3).get(2).toString());
-        }*/
-
         listInfo = new ArrayList<>();
-        int totale = 0;
 
         for(int i = 2; i<6; i++)
         {
             if(list.get(position).get(i).toString().equals("vuoto"))
             {
                 List<String> arrlistInfo = new ArrayList<String>();
-                arrlistInfo.add("vuoto");
-                arrlistInfo.add("vuoto");
-                arrlistInfo.add("vuoto");
+                arrlistInfo.add(" ");
+                arrlistInfo.add(" ");
+                arrlistInfo.add(" ");
                 listInfo.add(arrlistInfo);
-                //holder.textViewPart1.setText(list.get(position).get(i).toString());
             }
             else
             {
@@ -88,45 +66,16 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
                         arrlistInfo.add(cursorInfo.getString(1));
                         arrlistInfo.add(cursorInfo.getString(2));
                         listInfo.add(arrlistInfo);
-                        totale++;
+
                     }
                 }
             }
         }
 
-        //holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-        //holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-        //holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
-        //holder.textViewPart4.setText(list.get(position).get(5).toString() + " " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()+ " " + listInfo.get(positionInfo3).get(2).toString());
-
-        /*holder.textViewPart1.setText(list.get(position).get(2).toString());
-        holder.textViewPart2.setText(list.get(position).get(3).toString());
-        holder.textViewPart3.setText(list.get(position).get(4).toString());
-        holder.textViewPart4.setText(list.get(position).get(5).toString());*/
-        /*if(totale <3)
-        {
-            holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-            holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-            holder.textViewPart2.setText("Vuoto");
-            holder.textViewPart3.setText("Vuoto");
-        }
-        if(totale==3)
-        {
-            holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-            holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-            holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
-            holder.textViewPart4.setText("Vuoto");
-        }
-        if(totale == 4){
-            holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-            holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-            holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
-            holder.textViewPart4.setText(list.get(position).get(5).toString() + " " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()+ " " + listInfo.get(positionInfo3).get(2).toString());
-        }*/
-
-
-
-
+        holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
+        holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
+        holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
+        holder.textViewPart4.setText(list.get(position).get(5).toString() + " " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()+ " " + listInfo.get(positionInfo3).get(2).toString());
 
     }
 
