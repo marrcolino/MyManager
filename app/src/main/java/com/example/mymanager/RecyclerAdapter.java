@@ -45,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.TextCorso.setText(list.get(position).get(3).toString());
             if(MainActivity.utenteLoggato.matricola.charAt(0)!='0')
             {
-                holder.TextNomeprof.setText(list.get(position).get(5).toString());
+                holder.TextNomeprof.setText(list.get(position).get(5).toString() + " " + list.get(position).get(6).toString());
             }
             else
             {

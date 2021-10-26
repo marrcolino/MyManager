@@ -26,7 +26,9 @@
                 android:textColor="@color/blue_app"
                 android:textSize="25dp"
                 android:padding="10dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
                 />
 
             <TextView
@@ -37,7 +39,9 @@
                 android:textColor="@color/blue_app"
                 android:textSize="15dp"
                 android:padding="10dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
                 />
 
             <TextView
@@ -48,7 +52,9 @@
                 android:textColor="@color/blue_app"
                 android:textSize="15dp"
                 android:padding="10dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
                 />
 
             <TextView
@@ -59,7 +65,10 @@
                 android:textColor="@color/blue_app"
                 android:textSize="20dp"
                 android:padding="10dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
                 />
 
             <Button
@@ -70,7 +79,9 @@
                 android:backgroundTint="@color/blue_app"
                 android:text="iscriviti"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
 
             <Button
                 android:id="@+id/buttonCancIscrizione"
@@ -80,7 +91,9 @@
                 android:backgroundTint="@color/blue_app"
                 android:text="Abbandona"
                 android:textColor="#FFFFFF"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
 
         </TableLayout>
     </ScrollView>

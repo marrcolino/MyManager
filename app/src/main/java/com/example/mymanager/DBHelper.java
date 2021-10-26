@@ -122,6 +122,27 @@ public class DBHelper extends SQLiteOpenHelper {
         return result!= -1;
     }
 
+    public Boolean updateGruppo(String id, String nome ,String part2 , String part3, String part4) {
+        int result;
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nome", nome);
+        contentValues.put("matricolaPartecipante2", part2);
+        contentValues.put("matricolaPartecipante3", part3);
+        contentValues.put("matricolaPartecipante4", part4);
+        result = DB.update("Gruppo", contentValues, "id=?", new String[]{id});
+        return result!= -1;
+    }
+
+    public Boolean abbandonaGruppo(String id, String nomeTabella) {
+        int result;
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(nomeTabella, "vuoto");
+        result = DB.update("Gruppo", contentValues, "id=?", new String[]{id});
+        return result!= -1;
+    }
+
     public Boolean deleteCasoDiStudio(String id){
         SQLiteDatabase DB = this.getWritableDatabase();
         long result = DB.delete("CasoDiStudio",  "id=?", new String[]{id});
@@ -146,7 +167,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor listaCasiDiStudio(String matricola){
-        String query = "select CasoDiStudio.*, Professore.nome from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID INNER JOIN Professore on CasoDiStudio.matricolaProfessore = Professore.matricola where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
+        String query = "select CasoDiStudio.*, Professore.nome, Professore.cognome from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID INNER JOIN Professore on CasoDiStudio.matricolaProfessore = Professore.matricola where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
         SQLiteDatabase DB = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -158,7 +179,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor listaGruppi(String matricola) {
 
-        String query = " SELECT Gruppo.* FROM Gruppo WHERE Gruppo.matricolaPartecipante1 = " + matricola + "  OR Gruppo.matricolaPartecipante2 = " + matricola + "  OR Gruppo.matricolaPartecipante3 = " + matricola + "  OR Gruppo.matricolaPartecipante4 = " + matricola + "";
+        String query = " SELECT Gruppo.*, CasoDiStudio.nome FROM Gruppo INNER JOIN CasoDiStudio on Gruppo.IDCasoStudio = CasoDiStudio.ID WHERE Gruppo.matricolaPartecipante1 = " + matricola + "  OR Gruppo.matricolaPartecipante2 = " + matricola + "  OR Gruppo.matricolaPartecipante3 = " + matricola + "  OR Gruppo.matricolaPartecipante4 = " + matricola + "";
 
         SQLiteDatabase DB = this.getReadableDatabase();
 
@@ -168,6 +189,21 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return cursor;
 
+    }
+
+    public Boolean checkIDStudente(String matricola) {
+        String query = "SELECT nome FROM Studente WHERE matricola = '"+ matricola +"'";
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
     }
 
     public Cursor listaCasiProf(String matricola) {

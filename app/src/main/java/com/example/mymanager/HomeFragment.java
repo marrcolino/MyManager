@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
                     arrlist.add(cursor.getString(3));
                     arrlist.add(cursor.getString(4));
                     arrlist.add(cursor.getString(5));
+                    arrlist.add(cursor.getString(6));
                     list.add(arrlist);
                 }
             }

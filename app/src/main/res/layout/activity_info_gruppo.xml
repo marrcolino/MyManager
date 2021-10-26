@@ -6,12 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".InfoGruppo">
 
-    <TextView
-        android:id="@+id/nomeGruppo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="104dp"
-        tools:ignore="MissingConstraints" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-48dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <TextView
+                android:id="@+id/textViewNomeCasoGruppo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome caso di studio"
+                android:textColor="@color/blue_app"
+                android:textSize="25dp"
+                android:padding="10dp"
+                android:layout_margin="20dp"
+                />
+
+            <EditText
+                android:id="@+id/editTextModNomeGruppo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci il nome del gruppo"
+                android:inputType="text"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextModPart2"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci la matricola dello studente"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextModPart3"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci la matricola dello studente"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <EditText
+                android:id="@+id/editTextModPart4"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:hint="Inserisci la matricola dello studente"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/buttonSalvaModGruppo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="#0094FF"
+                android:text="Salva modifiche"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/buttonAbbandonaGruppo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="#0094FF"
+                android:text="Abbandona gruppo"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+        </TableLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
