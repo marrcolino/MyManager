@@ -167,7 +167,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor listaCasiDiStudio(String matricola){
-        String query = "select CasoDiStudio.*, Professore.nome, Professore.cognome from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID INNER JOIN Professore on CasoDiStudio.matricolaProfessore = Professore.matricola where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
+        String query = "select CasoDiStudio.*, Professore.nome, Professore.cognome, Gruppo.nome from CasoDiStudio INNER JOIN Gruppo on Gruppo.IDCasoStudio = CasoDiStudio.ID INNER JOIN Professore on CasoDiStudio.matricolaProfessore = Professore.matricola where Gruppo.matricolaPartecipante1 = " + matricola + " or Gruppo.matricolaPartecipante2 = " + matricola + " or Gruppo.matricolaPartecipante3 = " + matricola + " or Gruppo.matricolaPartecipante4 = " + matricola + "";
         SQLiteDatabase DB = this.getReadableDatabase();
 
         Cursor cursor = null;

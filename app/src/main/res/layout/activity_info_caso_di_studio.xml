@@ -95,6 +95,16 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"/>
 
+            <Button
+                android:id="@+id/inseriscifile"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="Aggiungi File"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
         </TableLayout>
     </ScrollView>
 
