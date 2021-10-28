@@ -234,8 +234,19 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor listaInfoStudentiGruppiIscritti(String matricola) {
-
         String query = "SELECT nome, cognome, email FROM Studente WHERE matricola = '"+ matricola +"'";
+
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor listaCasiDiStudioCerca(String cerca) {
+        String query = "SELECT CasoDiStudio.*, Professore.nome, Professore.cognome FROM CasoDiStudio INNER JOIN Professore on CasoDiStudio.matricolaProfessore = Professore.matricola WHERE CasoDiStudio.nome LIKE '%"+ cerca +"%' or CasoDiStudio.esame LIKE '%"+ cerca +"%' or Professore.nome LIKE '%"+ cerca + "%' or Professore.cognome LIKE '%"+ cerca + "%'";
 
         SQLiteDatabase DB = this.getReadableDatabase();
 

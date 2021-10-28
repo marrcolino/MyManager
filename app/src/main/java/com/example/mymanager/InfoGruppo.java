@@ -143,7 +143,9 @@ public class InfoGruppo extends AppCompatActivity {
                     }
                 }
 
-                if(matricoleGiuste && (!partecipante2.equals("vuoto") || !partecipante3.equals("vuoto") || !partecipante4.equals("vuoto")))
+                if(matricoleGiuste
+                        && (!partecipante2.equals("vuoto") || !partecipante3.equals("vuoto") || !partecipante4.equals("vuoto"))
+                        && (!partecipante2.equals(partecipante3) && !partecipante2.equals(partecipante4) && !partecipante3.equals(partecipante4)))
                 {
                     Boolean updateGruppo;
                     if(partecipante2.equals("vuoto"))
@@ -165,7 +167,7 @@ public class InfoGruppo extends AppCompatActivity {
                 }
                 else
                 {
-                    toastMessage("Una delle matricole è errata oppure inserire almeno un partecipante!");
+                    toastMessage("Una delle matricole è errata o uguale alle altre, oppure inserire almeno un partecipante!");
                 }
             }
         });

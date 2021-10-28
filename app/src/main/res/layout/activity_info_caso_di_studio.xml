@@ -58,6 +58,19 @@
                 />
 
             <TextView
+                android:id="@+id/textViewInfoNomeGruppo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome gruppo"
+                android:textColor="@color/blue_app"
+                android:textSize="15dp"
+                android:padding="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
                 android:id="@+id/textViewDescrizione"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

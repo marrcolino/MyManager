@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_account"
             android:title="@string/menu_account" />
         <item
+            android:id="@+id/nav_cercaCasi"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="@string/menu_cerca_casi" />
+        <item
             android:id="@+id/nav_crea_gruppi"
             android:icon="@drawable/ic_group_add"
             android:title="@string/menu_crea_gruppo"

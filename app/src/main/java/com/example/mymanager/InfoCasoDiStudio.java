@@ -36,7 +36,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
     private ArrayList<List> list = new ArrayList<List>();
     private int position;
-    TextView textViewNomeCorso, textViewEsame, textViewDescrizione, textViewProf;
+    TextView textViewNomeCorso, textViewEsame, textViewDescrizione, textViewProf, textViewInfoNomeGruppo;
     private String chiamante = "";
     private StorageReference storageReference;
     private Button inserisci;
@@ -173,7 +173,8 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         textViewDescrizione.setText(list.get(position).get(2).toString());
         textViewProf = findViewById(R.id.textViewProf);
         textViewProf.setText(list.get(position).get(5).toString());
-        //toastMessage(chiamante);
+        textViewInfoNomeGruppo = findViewById(R.id.textViewInfoNomeGruppo);
+        textViewInfoNomeGruppo.setText(list.get(position).get(7).toString());
     }
 
     // this event will enable the back
