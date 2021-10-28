@@ -163,6 +163,16 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Boolean deleteGruppo(String id){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        long result = DB.delete("Gruppo",  "ID=?", new String[]{id});
+        if (result == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Cursor login (String matricola, String password){
         Cursor cursor;
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -202,9 +212,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor nomeCaso(String idCaso) {
-
         String query = "SELECT nome FROM CasoDiStudio WHERE ID = '"+ idCaso +"'";
-
         SQLiteDatabase DB = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -212,7 +220,6 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = DB.rawQuery(query, null);
         }
         return cursor;
-
     }
 
     public Boolean checkIDStudente(String matricola) {
@@ -311,7 +318,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Boolean checkGruppoIscritto(String matricola, String idCaso) {
+    public Cursor checkGruppoIscritto(String matricola, String idCaso) {
         String query = "SELECT nome FROM Gruppo WHERE IDCasoStudio = '"+ idCaso +"' AND (matricolaPartecipante1 = '"+ matricola +"' or matricolaPartecipante2 = '"+ matricola +"' or matricolaPartecipante3 = '"+ matricola +"' or matricolaPartecipante4 = '"+ matricola +"')";
         SQLiteDatabase DB = this.getReadableDatabase();
 
@@ -320,10 +327,7 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = DB.rawQuery(query, null);
         }
 
-        if(cursor.getCount()>0)
-            return true;
-        else
-            return false;
+        return cursor;
     }
 
 }

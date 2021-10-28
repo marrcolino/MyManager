@@ -65,7 +65,6 @@
                 android:padding="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
                 />
 
             <TextView
@@ -78,20 +77,18 @@
                 android:padding="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
                 />
 
             <TextView
                 android:id="@+id/textViewInfoNomeGruppo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome gruppo"
+                android:text="Nome gruppo : "
                 android:textColor="@color/blue_app"
                 android:textSize="15dp"
                 android:padding="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
                 />
 
             <TextView
@@ -118,13 +115,16 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"/>
 
             <Button
                 android:id="@+id/inseriscifile"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/blue_app"
                 android:text="Aggiungi File"
                 android:textColor="#FFFFFF"

@@ -21,10 +21,11 @@ import java.util.List;
 
 public class InfoGruppo extends AppCompatActivity {
 
-    private Button salvaMod, abbandona;
-    private TextView nomeCaso;
-    private EditText nomeGruppo, part2, part3, part4;
+    private Button salvaMod, abbandona, buttonCancellaGruppo;
+    private TextView nomeCaso, textViewCreatore, textViewModPart2, textViewModPart3, textViewModPart4;
+    private EditText nomeGruppo, part2, part3, part4, editTextCreatore;
     private ArrayList<List> list = new ArrayList<List>();
+    private ArrayList<List> listInfo = new ArrayList<List>();
     private int position;
     private String partecipante2, partecipante3, partecipante4;
 
@@ -63,38 +64,77 @@ public class InfoGruppo extends AppCompatActivity {
 
         salvaMod = (Button)findViewById(R.id.buttonSalvaModGruppo);
         abbandona = (Button)findViewById(R.id.buttonAbbandonaGruppo);
+        buttonCancellaGruppo = (Button)findViewById(R.id.buttonCancellaGruppo);
 
         nomeCaso = (TextView) findViewById(R.id.textViewNomeCasoGruppo);
         Cursor cursorNomeCaso = MainActivity.DB.nomeCaso(list.get(position).get(6).toString());
         if(cursorNomeCaso.getCount() > 0)
         {
-            while (cursor.moveToNext()) {
-                nomeCaso.setText(cursor.getString(0));
+            while (cursorNomeCaso.moveToNext()) {
+                nomeCaso.setText("Caso di studio : " + cursorNomeCaso.getString(0));
             }
         }
 
         nomeGruppo = (EditText) findViewById(R.id.editTextModNomeGruppo);
         nomeGruppo.setText(list.get(position).get(1).toString());
 
+        for(int i = 2; i<6; i++){
+            if(list.get(position).get(i).toString().equals("vuoto"))
+            {
+                List<String> arrlistInfo = new ArrayList<String>();
+                arrlistInfo.add(" ");
+                arrlistInfo.add(" ");
+                arrlistInfo.add(" ");
+                listInfo.add(arrlistInfo);
+            }
+            else
+            {
+                Cursor cursorInfo = MainActivity.DB.listaInfoStudentiGruppiIscritti(list.get(position).get(i).toString());
+                if (cursorInfo.getCount() > 0) {
+                    while (cursorInfo.moveToNext()) {
+                        List<String> arrlistInfo = new ArrayList<String>();
+                        arrlistInfo.add(cursorInfo.getString(0));
+                        arrlistInfo.add(cursorInfo.getString(1));
+                        arrlistInfo.add(cursorInfo.getString(2));
+                        listInfo.add(arrlistInfo);
+                    }
+                }
+            }
+        }
+
+        textViewCreatore = (TextView) findViewById(R.id.textViewCreatore);
+        textViewCreatore.setText("Creatore : "+listInfo.get(0).get(0).toString() + " " + listInfo.get(0).get(1).toString());
+        editTextCreatore = (EditText) findViewById(R.id.editTextCreatore);
+        editTextCreatore.setText(list.get(position).get(2).toString());
+
+        textViewModPart2 = (TextView) findViewById(R.id.textViewModPart2);
+        textViewModPart2.setText(listInfo.get(1).get(0).toString() + " " + listInfo.get(1).get(1).toString());
         part2 = (EditText) findViewById(R.id.editTextModPart2);
         part2.setText(list.get(position).get(3).toString());
 
+        textViewModPart3 = (TextView) findViewById(R.id.textViewModPart3);
+        textViewModPart3.setText(listInfo.get(2).get(0).toString() + " " + listInfo.get(2).get(1).toString());
         part3 = (EditText) findViewById(R.id.editTextModPart3);
         part3.setText(list.get(position).get(4).toString());
 
+        textViewModPart4 = (TextView) findViewById(R.id.textViewModPart4);
+        textViewModPart4.setText(listInfo.get(3).get(0).toString() + " " + listInfo.get(3).get(1).toString());
         part4 = (EditText) findViewById(R.id.editTextModPart4);
         part4.setText(list.get(position).get(5).toString());
 
         if(!MainActivity.utenteLoggato.matricola.equals(list.get(position).get(2).toString()))
         {
+            //PARTECIPANTE
             nomeGruppo.setEnabled(false);
             part2.setEnabled(false);
             part3.setEnabled(false);
             part4.setEnabled(false);
             salvaMod.setVisibility(View.GONE);
+            buttonCancellaGruppo.setVisibility(View.GONE);
         }
         else
         {
+            //CREATORE
             abbandona.setVisibility(View.GONE);
         }
 
@@ -194,21 +234,73 @@ public class InfoGruppo extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
+                        Boolean gruppoAbbandonato = false;
                         if(MainActivity.utenteLoggato.matricola.equals(part2.getText().toString()))
                         {
-                            MainActivity.DB.abbandonaGruppo(list.get(position).get(0).toString(), "matricolaPartecipante2");
+                            gruppoAbbandonato = MainActivity.DB.abbandonaGruppo(list.get(position).get(0).toString(), "matricolaPartecipante2");
                         }
                         else if(MainActivity.utenteLoggato.matricola.equals(part3.getText().toString()))
                         {
-                            MainActivity.DB.abbandonaGruppo(list.get(position).get(0).toString(), "matricolaPartecipante3");
+                            gruppoAbbandonato = MainActivity.DB.abbandonaGruppo(list.get(position).get(0).toString(), "matricolaPartecipante3");
                         }
                         else
                         {
-                            MainActivity.DB.abbandonaGruppo(list.get(position).get(0).toString(), "matricolaPartecipante4");
+                            gruppoAbbandonato = MainActivity.DB.abbandonaGruppo(list.get(position).get(0).toString(), "matricolaPartecipante4");
                         }
-                        toastMessage("Gruppo abbandonato!");
+
+                        if(gruppoAbbandonato)
+                        {
+                            toastMessage("Gruppo abbandonato!");
+                            dialog.dismiss();
+                            startActivity(new Intent(InfoGruppo.this, Home.class));
+                        }
+                        else
+                        {
+                            toastMessage("Something wrong!");
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
                         dialog.dismiss();
-                        startActivity(new Intent(InfoGruppo.this, Home.class));
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        buttonCancellaGruppo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoGruppo.this);
+
+                builder.setTitle("Conferma");
+                builder.setMessage("Sei sicuro di voler cancellare il gruppo?");
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing but close the dialog
+                        Boolean gruppoCancellato = false;
+                        gruppoCancellato = MainActivity.DB.deleteGruppo(list.get(position).get(0).toString());
+
+                        if(gruppoCancellato)
+                        {
+                            toastMessage("Gruppo cancellato!");
+                            dialog.dismiss();
+                            startActivity(new Intent(InfoGruppo.this, Home.class));
+                        }
+                        else
+                        {
+                            toastMessage("Something wrong!");
+                        }
                     }
                 });
 

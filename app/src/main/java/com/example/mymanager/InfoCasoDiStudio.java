@@ -83,13 +83,18 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
             if(call.equals("cerca"))
             {
+                //CHIAMATO DALLA PAGINA CercaCasiFragment
                 caricaInfoCasiDaRicerca();
 
                 buttonCancIscrizione.setVisibility(View.GONE);
                 inserisci.setVisibility(View.GONE);
-                textViewInfoNomeGruppo.setVisibility(View.GONE);
-                if(MainActivity.DB.checkGruppoIscritto(MainActivity.utenteLoggato.matricola, list.get(position).get(0).toString()))
+                //textViewInfoNomeGruppo.setVisibility(View.GONE);
+                Cursor cursorNome = MainActivity.DB.checkGruppoIscritto(MainActivity.utenteLoggato.matricola, list.get(position).get(0).toString());
+                if(cursorNome.getCount()>0)
                 {
+                    while (cursorNome.moveToNext()) {
+                        textViewInfoNomeGruppo.setText("Nome gruppo : " + cursorNome.getString(0));
+                    }
                     editTextIscriviGruppo.setEnabled(false);
                     buttonIscriviti.setEnabled(false);
                     buttonIscriviti.setText("iscritto ✓");
@@ -97,15 +102,16 @@ public class InfoCasoDiStudio extends AppCompatActivity {
             }
             else
             {
+                //CHIAMATO DALLA PAGINA HomeFragment
                 caricaInfoCasi();
 
+                editTextIscriviGruppo.setVisibility(View.GONE);
                 buttonIscriviti.setVisibility(View.GONE);
                 /*if()
                 {
 
                 }*/
             }
-            //The key argument here must match that used in the other activity
         }
 
         inserisci.setOnClickListener(new View.OnClickListener() {
@@ -131,10 +137,6 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         buttonIscriviti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //CODICE PER CHIUDERE LA TASTIERA
-                InputMethodManager inputManager = (InputMethodManager) InfoCasoDiStudio.this.getSystemService(Context.INPUT_METHOD_SERVICE);
-                //inputManager.hideSoftInputFromWindow(InfoCasoDiStudio.this.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-
                 String nomeGruppo = editTextIscriviGruppo.getText().toString();
                 if(!nomeGruppo.equals(""))
                 {
@@ -283,11 +285,11 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 list.add(arrlist);
             }
 
-            textViewNomeCorso.setText(list.get(position).get(1).toString());
-            textViewEsame.setText(list.get(position).get(3).toString());
-            textViewDescrizione.setText(list.get(position).get(2).toString());
-            textViewProf.setText(list.get(position).get(5).toString());
-            textViewInfoNomeGruppo.setText(list.get(position).get(7).toString());
+            textViewNomeCorso.setText("Caso di studio : " + list.get(position).get(1).toString());
+            textViewEsame.setText("Nome esame : " + list.get(position).get(3).toString());
+            textViewDescrizione.setText("Descrizione : " + list.get(position).get(2).toString());
+            textViewProf.setText("Nome professore : " + list.get(position).get(5).toString());
+            textViewInfoNomeGruppo.setText("Nome gruppo : " + list.get(position).get(7).toString());
         }
     }
 
@@ -307,10 +309,10 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 list.add(arrlist);
             }
 
-            textViewNomeCorso.setText(list.get(position).get(1).toString());
-            textViewEsame.setText(list.get(position).get(3).toString());
-            textViewDescrizione.setText(list.get(position).get(2).toString());
-            textViewProf.setText(list.get(position).get(5).toString());
+            textViewNomeCorso.setText("Caso di studio : " + list.get(position).get(1).toString());
+            textViewEsame.setText("Nome esame : " + list.get(position).get(3).toString());
+            textViewDescrizione.setText("Descrizione : " + list.get(position).get(2).toString());
+            textViewProf.setText("Nome professore : " + list.get(position).get(5).toString());
         }
     }
 

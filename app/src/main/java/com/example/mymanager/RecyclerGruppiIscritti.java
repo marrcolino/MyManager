@@ -66,7 +66,6 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
                         arrlistInfo.add(cursorInfo.getString(1));
                         arrlistInfo.add(cursorInfo.getString(2));
                         listInfo.add(arrlistInfo);
-
                     }
                 }
             }

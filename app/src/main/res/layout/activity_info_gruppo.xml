@@ -22,18 +22,32 @@
                 android:id="@+id/textViewNomeCasoGruppo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome caso di studio"
+                android:text="Caso di studio : "
                 android:textColor="@color/blue_app"
                 android:textSize="25dp"
                 android:padding="10dp"
                 android:layout_margin="20dp"
                 />
 
+            <TextView
+                android:id="@+id/textViewModNomeGruppo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome gruppo"
+                android:textColor="@color/blue_app"
+                android:textSize="18dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+
             <EditText
                 android:id="@+id/editTextModNomeGruppo"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Inserisci il nome del gruppo"
@@ -43,11 +57,53 @@
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"/>
 
+            <TextView
+                android:id="@+id/textViewCreatore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome creatore : "
+                android:textColor="@color/blue_app"
+                android:textSize="18dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+
+            <EditText
+                android:id="@+id/editTextCreatore"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:ems="10"
+                android:inputType="number"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:enabled="false"/>
+
+            <TextView
+                android:id="@+id/textViewModPart2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome partecipante : "
+                android:textColor="@color/blue_app"
+                android:textSize="18dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+
             <EditText
                 android:id="@+id/editTextModPart2"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Inserisci la matricola dello studente"
@@ -56,12 +112,26 @@
                 android:shadowColor="@color/black"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/textViewModPart3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome partecipante : "
+                android:textColor="@color/blue_app"
+                android:textSize="18dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
 
             <EditText
                 android:id="@+id/editTextModPart3"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Inserisci la matricola dello studente"
@@ -71,11 +141,25 @@
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"/>
 
+            <TextView
+                android:id="@+id/textViewModPart4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome partecipante : "
+                android:textColor="@color/blue_app"
+                android:textSize="18dp"
+                android:padding="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+
             <EditText
                 android:id="@+id/editTextModPart4"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/edit_text_style2"
                 android:ems="10"
                 android:hint="Inserisci la matricola dello studente"
@@ -92,6 +176,18 @@
                 android:layout_margin="20dp"
                 android:backgroundTint="#0094FF"
                 android:text="Salva modifiche"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/buttonCancellaGruppo"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#0094FF"
+                android:text="Cancella gruppo"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"/>
 

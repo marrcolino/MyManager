@@ -44,7 +44,6 @@ public class CreaGruppo extends AppCompatActivity {
                 editTextPart4 = findViewById(R.id.editTextPart4);
                 String part4 = editTextPart4.getText().toString();
 
-
                 boolean campiVuoti = false;
 
                 if(nome.isEmpty()){
@@ -68,16 +67,24 @@ public class CreaGruppo extends AppCompatActivity {
                     {
                         part4 = "vuoto";
                     }
-                    boolean insertUser = MainActivity.DB.insertGruppo(nome, partCreatore, part2, part3, part4);
 
-                    if (insertUser) {
-                        toastMessage("Creazione gruppo completata!" + part3 + " " + part4);
-                        editTextNome.setText("");
-                        editTextPart2.setText("");
-                        editTextPart3.setText("");
-                        editTextPart4.setText("");
-                    } else {
-                        toastMessage("Something went wrong");
+                    if(!MainActivity.DB.checkNomeGruppo(nome))
+                    {
+                        boolean insertUser = MainActivity.DB.insertGruppo(nome, partCreatore, part2, part3, part4);
+
+                        if (insertUser) {
+                            toastMessage("Creazione gruppo completata!");
+                            editTextNome.setText("");
+                            editTextPart2.setText("");
+                            editTextPart3.setText("");
+                            editTextPart4.setText("");
+                        } else {
+                            toastMessage("Something went wrong");
+                        }
+                    }
+                    else
+                    {
+                        toastMessage("Nome gruppo già esistente!");
                     }
                 } else {
                     toastMessage("Riempire almeno i primi due campi!");

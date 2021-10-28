@@ -1,5 +1,6 @@
 package com.example.mymanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +25,22 @@ public class ListaGruppiFragment extends Fragment implements RecyclerAdapterGrup
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerAdapterGruppi adapter;
     private ArrayList<List> list = new ArrayList<List>();
+    private Button buttonListaCreaGruppo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
+
+        buttonListaCreaGruppo = (Button)view.findViewById(R.id.buttonListaCreaGruppo);
+
+        buttonListaCreaGruppo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CreaGruppo.class));
+            }
+        });
 
         buildListData();
         initRecyclerView(view);
