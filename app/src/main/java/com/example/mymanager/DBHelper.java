@@ -78,6 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("matricolaPartecipante2", part2);
         contentValues.put("matricolaPartecipante3", part3);
         contentValues.put("matricolaPartecipante4", part4);
+        contentValues.put("IDCasoStudio", "");
         result = DB.insert("Gruppo", null, contentValues);
 
         return result!= -1;
@@ -134,6 +135,15 @@ public class DBHelper extends SQLiteOpenHelper {
         return result!= -1;
     }
 
+    public Boolean updateIscrizioneGruppo(String nome, String idCaso) {
+        int result;
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("IDCasoStudio", idCaso);
+        result = DB.update("Gruppo", contentValues, "nome=?", new String[]{nome});
+        return result!= -1;
+    }
+
     public Boolean abbandonaGruppo(String id, String nomeTabella) {
         int result;
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -179,7 +189,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor listaGruppi(String matricola) {
 
-        String query = " SELECT Gruppo.*, CasoDiStudio.nome FROM Gruppo INNER JOIN CasoDiStudio on Gruppo.IDCasoStudio = CasoDiStudio.ID WHERE Gruppo.matricolaPartecipante1 = " + matricola + "  OR Gruppo.matricolaPartecipante2 = " + matricola + "  OR Gruppo.matricolaPartecipante3 = " + matricola + "  OR Gruppo.matricolaPartecipante4 = " + matricola + "";
+        String query = " SELECT * FROM Gruppo WHERE matricolaPartecipante1 = " + matricola + "  OR matricolaPartecipante2 = " + matricola + "  OR matricolaPartecipante3 = " + matricola + "  OR matricolaPartecipante4 = " + matricola + "";
+
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+        return cursor;
+
+    }
+
+    public Cursor nomeCaso(String idCaso) {
+
+        String query = "SELECT nome FROM CasoDiStudio WHERE ID = '"+ idCaso +"'";
 
         SQLiteDatabase DB = this.getReadableDatabase();
 
@@ -193,6 +217,21 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Boolean checkIDStudente(String matricola) {
         String query = "SELECT nome FROM Studente WHERE matricola = '"+ matricola +"'";
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean checkNomeGruppo(String nome) {
+        String query = "SELECT id FROM Gruppo WHERE nome = '"+ nome +"'";
         SQLiteDatabase DB = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -255,6 +294,36 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = DB.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    public Boolean checkCreatoreGruppo(String matricola, String nomeGruppo) {
+        String query = "SELECT id FROM Gruppo WHERE matricolaPartecipante1 = '"+ matricola +"' AND nome = '"+ nomeGruppo +"'";
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean checkGruppoIscritto(String matricola, String idCaso) {
+        String query = "SELECT nome FROM Gruppo WHERE IDCasoStudio = '"+ idCaso +"' AND (matricolaPartecipante1 = '"+ matricola +"' or matricolaPartecipante2 = '"+ matricola +"' or matricolaPartecipante3 = '"+ matricola +"' or matricolaPartecipante4 = '"+ matricola +"')";
+        SQLiteDatabase DB = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(DB != null){
+            cursor = DB.rawQuery(query, null);
+        }
+
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
     }
 
 }

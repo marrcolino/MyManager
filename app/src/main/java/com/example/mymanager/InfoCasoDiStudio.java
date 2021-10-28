@@ -2,6 +2,7 @@ package com.example.mymanager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -9,6 +10,8 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -17,7 +20,9 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +44,8 @@ public class InfoCasoDiStudio extends AppCompatActivity {
     TextView textViewNomeCorso, textViewEsame, textViewDescrizione, textViewProf, textViewInfoNomeGruppo;
     private String chiamante = "";
     private StorageReference storageReference;
-    private Button inserisci;
+    private Button inserisci, buttonCancIscrizione, buttonIscriviti;
+    private EditText editTextIscriviGruppo;
     Uri pdfUri;
 
     @Override
@@ -54,11 +60,54 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        caricaInfocasi();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
-        storageReference= FirebaseStorage.getInstance().getReference();
+        textViewNomeCorso = (TextView)findViewById(R.id.textViewNomeCaso);
+        textViewEsame = (TextView)findViewById(R.id.textViewEsame);
+        textViewDescrizione = (TextView)findViewById(R.id.textViewDescrizione);
+        textViewProf = (TextView)findViewById(R.id.textViewProf);
+        textViewInfoNomeGruppo = (TextView)findViewById(R.id.textViewInfoNomeGruppo);
+        editTextIscriviGruppo = (EditText)findViewById(R.id.editTextIscriviGruppo);
 
-        inserisci = findViewById(R.id.inseriscifile);
+        inserisci = (Button)findViewById(R.id.inseriscifile);
+        buttonCancIscrizione = (Button)findViewById(R.id.buttonCancIscrizione);
+        buttonIscriviti = (Button)findViewById(R.id.buttonIscriviti);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String call = "";
+            int index = 0;
+            index = extras.getString("key").indexOf('$');
+            call = extras.getString("key").substring(0, index);
+            position = Integer.parseInt(extras.getString("key").substring(index+1));
+
+            if(call.equals("cerca"))
+            {
+                caricaInfoCasiDaRicerca();
+
+                buttonCancIscrizione.setVisibility(View.GONE);
+                inserisci.setVisibility(View.GONE);
+                textViewInfoNomeGruppo.setVisibility(View.GONE);
+                if(MainActivity.DB.checkGruppoIscritto(MainActivity.utenteLoggato.matricola, list.get(position).get(0).toString()))
+                {
+                    editTextIscriviGruppo.setEnabled(false);
+                    buttonIscriviti.setEnabled(false);
+                    buttonIscriviti.setText("iscritto ✓");
+                }
+            }
+            else
+            {
+                caricaInfoCasi();
+
+                buttonIscriviti.setVisibility(View.GONE);
+                /*if()
+                {
+
+                }*/
+            }
+            //The key argument here must match that used in the other activity
+        }
+
         inserisci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +118,80 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 }
                 else
                     ActivityCompat.requestPermissions(InfoCasoDiStudio.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
+            }
+        });
+
+        buttonCancIscrizione.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        buttonIscriviti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //CODICE PER CHIUDERE LA TASTIERA
+                InputMethodManager inputManager = (InputMethodManager) InfoCasoDiStudio.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                //inputManager.hideSoftInputFromWindow(InfoCasoDiStudio.this.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                String nomeGruppo = editTextIscriviGruppo.getText().toString();
+                if(!nomeGruppo.equals(""))
+                {
+                    if(MainActivity.DB.checkNomeGruppo(nomeGruppo))
+                    {
+                        if(MainActivity.DB.checkCreatoreGruppo(MainActivity.utenteLoggato.matricola, nomeGruppo))
+                        {
+                            //ISCRIZIONE
+                            AlertDialog.Builder builder = new AlertDialog.Builder(InfoCasoDiStudio.this);
+
+                            builder.setTitle("Conferma");
+                            builder.setMessage("Sei sicuro di voler iscrivere il gruppo?");
+
+                            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do something and close the dialog
+                                    Boolean iscrizione = MainActivity.DB.updateIscrizioneGruppo(nomeGruppo, list.get(position).get(0).toString());
+
+                                    if(iscrizione)
+                                    {
+                                        toastMessage("Modifiche salvate!");
+                                        onBackPressed();
+
+                                    }
+                                    else {
+                                        toastMessage("Qualcosa è andato storto!");
+                                    }
+                                }
+                            });
+
+                            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                        }
+                        else
+                        {
+                            toastMessage("Per iscriverti devi essere il creatore del gruppo!");
+                        }
+                    }
+                    else
+                    {
+                        toastMessage("Inserire il nome di un gruppo esistente!");
+                    }
+                }
+                else
+                {
+                    editTextIscriviGruppo.setError("Riempire il campo!");
+                    toastMessage("Inserire il nome di un gruppo!");
+                }
+
             }
         });
     }
@@ -143,7 +266,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         });
     }
 
-    private void caricaInfocasi()
+    private void caricaInfoCasi()
     {
         Cursor cursor = MainActivity.DB.listaCasiDiStudio(MainActivity.utenteLoggato.matricola);
         if(cursor.getCount()>0){
@@ -159,22 +282,36 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 arrlist.add(cursor.getString(7));
                 list.add(arrlist);
             }
+
+            textViewNomeCorso.setText(list.get(position).get(1).toString());
+            textViewEsame.setText(list.get(position).get(3).toString());
+            textViewDescrizione.setText(list.get(position).get(2).toString());
+            textViewProf.setText(list.get(position).get(5).toString());
+            textViewInfoNomeGruppo.setText(list.get(position).get(7).toString());
         }
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            position = Integer.parseInt(extras.getString("key"));
-            //The key argument here must match that used in the other activity
+    }
+
+    private void caricaInfoCasiDaRicerca()
+    {
+        Cursor cursor = MainActivity.DB.listaCasiDiStudioCerca(CercaCasiFragment.barraDiRicerca);
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()) {
+                List<String> arrlist = new ArrayList<String>();
+                arrlist.add(cursor.getString(0));
+                arrlist.add(cursor.getString(1));
+                arrlist.add(cursor.getString(2));
+                arrlist.add(cursor.getString(3));
+                arrlist.add(cursor.getString(4));
+                arrlist.add(cursor.getString(5));
+                arrlist.add(cursor.getString(6));
+                list.add(arrlist);
+            }
+
+            textViewNomeCorso.setText(list.get(position).get(1).toString());
+            textViewEsame.setText(list.get(position).get(3).toString());
+            textViewDescrizione.setText(list.get(position).get(2).toString());
+            textViewProf.setText(list.get(position).get(5).toString());
         }
-        textViewNomeCorso = findViewById(R.id.textViewNomeCaso);
-        textViewNomeCorso.setText(list.get(position).get(1).toString());
-        textViewEsame = findViewById(R.id.textViewEsame);
-        textViewEsame.setText(list.get(position).get(3).toString());
-        textViewDescrizione = findViewById(R.id.textViewDescrizione);
-        textViewDescrizione.setText(list.get(position).get(2).toString());
-        textViewProf = findViewById(R.id.textViewProf);
-        textViewProf.setText(list.get(position).get(5).toString());
-        textViewInfoNomeGruppo = findViewById(R.id.textViewInfoNomeGruppo);
-        textViewInfoNomeGruppo.setText(list.get(position).get(7).toString());
     }
 
     // this event will enable the back

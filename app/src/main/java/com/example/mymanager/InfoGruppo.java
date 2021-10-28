@@ -51,7 +51,7 @@ public class InfoGruppo extends AppCompatActivity {
                 arrlist.add(cursor.getString(4));
                 arrlist.add(cursor.getString(5));
                 arrlist.add(cursor.getString(6));
-                arrlist.add(cursor.getString(7));
+                //arrlist.add(cursor.getString(7));
                 list.add(arrlist);
             }
         }
@@ -65,7 +65,13 @@ public class InfoGruppo extends AppCompatActivity {
         abbandona = (Button)findViewById(R.id.buttonAbbandonaGruppo);
 
         nomeCaso = (TextView) findViewById(R.id.textViewNomeCasoGruppo);
-        nomeCaso.setText(list.get(position).get(7).toString());
+        Cursor cursorNomeCaso = MainActivity.DB.nomeCaso(list.get(position).get(6).toString());
+        if(cursorNomeCaso.getCount() > 0)
+        {
+            while (cursor.moveToNext()) {
+                nomeCaso.setText(cursor.getString(0));
+            }
+        }
 
         nomeGruppo = (EditText) findViewById(R.id.editTextModNomeGruppo);
         nomeGruppo.setText(list.get(position).get(1).toString());
@@ -163,7 +169,11 @@ public class InfoGruppo extends AppCompatActivity {
                     {
                         updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante2, partecipante3, partecipante4);
                     }
-                    toastMessage("Modifiche salvate!");
+
+                    if(updateGruppo)
+                        toastMessage("Modifiche salvate!");
+                    else
+                        toastMessage("Qualcosa è andato storto!");
                 }
                 else
                 {

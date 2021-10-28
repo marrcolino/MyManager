@@ -45,7 +45,7 @@ public class ListaGruppiFragment extends Fragment implements RecyclerAdapterGrup
     }
 
     private void buildListData(){
-        //LISTA CASI DI STUDIO DELL'UTENTE LOGGATO
+        //LISTA GRUPPI DELL'UTENTE LOGGATO
         Cursor cursor = MainActivity.DB.listaGruppi(MainActivity.utenteLoggato.matricola);
         if(cursor.getCount()>0){
             while (cursor.moveToNext()) {
@@ -56,7 +56,7 @@ public class ListaGruppiFragment extends Fragment implements RecyclerAdapterGrup
                 arrlist.add(cursor.getString(3));
                 arrlist.add(cursor.getString(4));
                 arrlist.add(cursor.getString(5));
-                arrlist.add(cursor.getString(6));
+                //arrlist.add(cursor.getString(6));
                 list.add(arrlist);
             }
         }

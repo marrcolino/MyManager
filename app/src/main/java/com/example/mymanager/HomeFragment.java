@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
         transaction.commit();*/
         if(MainActivity.utenteLoggato.matricola.charAt(0)!='0') {
             Intent i = new Intent(getActivity(), InfoCasoDiStudio.class);
-            i.putExtra("key", Integer.toString((position)));
+            i.putExtra("key", "home$"+Integer.toString((position)));
             startActivity(i);
         }
         else

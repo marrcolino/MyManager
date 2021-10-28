@@ -34,6 +34,7 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
     private ArrayList<List> list = new ArrayList<List>();
     private EditText editTextCercaCaso;
     private Button buttonCercaCaso;
+    public static String barraDiRicerca;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
@@ -69,7 +70,8 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
     private void buildListData(){
         if(!editTextCercaCaso.getText().toString().equals(""))
         {
-            Cursor cursor = MainActivity.DB.listaCasiDiStudioCerca(editTextCercaCaso.getText().toString());
+            barraDiRicerca = editTextCercaCaso.getText().toString();
+            Cursor cursor = MainActivity.DB.listaCasiDiStudioCerca(barraDiRicerca);
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
                     List<String> arrlist = new ArrayList<String>();
@@ -94,7 +96,7 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
     @Override
     public void onItemClick(List casi, int position) {
         Intent i = new Intent(getActivity(), InfoCasoDiStudio.class);
-        i.putExtra("key", Integer.toString((position)));
+        i.putExtra("key", "cerca$"+Integer.toString((position)));
         startActivity(i);
     }
 

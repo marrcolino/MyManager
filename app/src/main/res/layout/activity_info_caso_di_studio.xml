@@ -18,6 +18,30 @@
 
             <!-- everything you already have -->
 
+            <EditText
+                android:id="@+id/editTextIscriviGruppo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/edit_text_style2"
+                android:hint="Inserisci il nome del gruppo da iscrivere"
+                android:inputType="text"
+                android:padding="10dp"
+                android:shadowColor="@color/black"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
+
+            <Button
+                android:id="@+id/buttonIscriviti"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/blue_app"
+                android:text="iscriviti"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+
             <TextView
                 android:id="@+id/textViewNomeCaso"
                 android:layout_width="wrap_content"
@@ -83,18 +107,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
                 />
-
-            <Button
-                android:id="@+id/buttonIscriviti"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:layout_margin="20dp"
-                android:backgroundTint="@color/blue_app"
-                android:text="iscriviti"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
 
             <Button
                 android:id="@+id/buttonCancIscrizione"
