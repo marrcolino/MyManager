@@ -1,10 +1,12 @@
 package com.example.mymanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,13 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
 
         holder.textViewNomeGruppo.setText(list.get(position).get(1).toString());
         listInfo = new ArrayList<>();
+        holder.listaFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),Lista_file_allegati.class);
+                v.getContext().startActivity(i);
+            }
+        });
 
         for(int i = 2; i<6; i++)
         {
@@ -85,6 +94,7 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView textViewNomeGruppo, textViewPart1, textViewPart2, textViewPart3, textViewPart4;
+        Button listaFile;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +103,8 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
             textViewPart2 = itemView.findViewById(R.id.textViewPart2);
             textViewPart3 = itemView.findViewById(R.id.textViewPart3);
             textViewPart4 = itemView.findViewById(R.id.textViewPart4);
+            listaFile = itemView.findViewById(R.id.buttonVediAllegati);
+
         }
 
         @Override

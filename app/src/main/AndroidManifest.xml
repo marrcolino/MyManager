@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mymanager">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -12,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyManager">
-        <activity android:name=".Lista_gruppi_iscritti"></activity>
+        <activity android:name=".Lista_file_allegati"></activity>
+        <activity android:name=".Lista_gruppi_iscritti" />
         <activity android:name=".InfoProfCasoDiStudio" />
         <activity android:name=".InfoGruppo" />
         <activity android:name=".InfoCasoDiStudio" />

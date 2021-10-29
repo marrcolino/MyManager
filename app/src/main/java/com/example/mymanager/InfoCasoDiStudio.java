@@ -73,6 +73,8 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         buttonCancIscrizione = (Button)findViewById(R.id.buttonCancIscrizione);
         buttonIscriviti = (Button)findViewById(R.id.buttonIscriviti);
 
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String call = "";
@@ -264,8 +266,9 @@ public class InfoCasoDiStudio extends AppCompatActivity {
             pdfUri = data.getData();
 
         } else {
-            Toast.makeText(InfoCasoDiStudio.this, "seleziona file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InfoCasoDiStudio.this, "non hai selezionato nessun file", Toast.LENGTH_SHORT).show();
         }
+        if(pdfUri!=null)
         uploadFile(pdfUri);
     }
 
@@ -274,7 +277,6 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle("uploading file");
         pd.show();
-
 
         storageReference= FirebaseStorage.getInstance().getReference();
         String fileName=pdfUri.getLastPathSegment();

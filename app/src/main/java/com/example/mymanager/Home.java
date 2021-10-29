@@ -134,6 +134,7 @@ public class Home extends AppCompatActivity {
                     Home.camera = false;
                 }
             }
+        if(selectedImage!=null)
             uploadimage();
     }
 
