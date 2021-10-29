@@ -89,15 +89,24 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 buttonCancIscrizione.setVisibility(View.GONE);
                 inserisci.setVisibility(View.GONE);
                 //textViewInfoNomeGruppo.setVisibility(View.GONE);
-                Cursor cursorNome = MainActivity.DB.checkGruppoIscritto(MainActivity.utenteLoggato.matricola, list.get(position).get(0).toString());
-                if(cursorNome.getCount()>0)
+
+                if(MainActivity.utenteLoggato.matricola.charAt(0) =='0')
                 {
-                    while (cursorNome.moveToNext()) {
-                        textViewInfoNomeGruppo.setText("Nome gruppo : " + cursorNome.getString(0));
+                    buttonIscriviti.setVisibility(View.GONE);
+                    editTextIscriviGruppo.setVisibility(View.GONE);
+                }
+                else
+                {
+                    Cursor cursorNome = MainActivity.DB.checkGruppoIscritto(MainActivity.utenteLoggato.matricola, list.get(position).get(0).toString());
+                    if(cursorNome.getCount()>0)
+                    {
+                        while (cursorNome.moveToNext()) {
+                            textViewInfoNomeGruppo.setText("Nome gruppo : " + cursorNome.getString(0));
+                        }
+                        editTextIscriviGruppo.setEnabled(false);
+                        buttonIscriviti.setEnabled(false);
+                        buttonIscriviti.setText("iscritto ✓");
                     }
-                    editTextIscriviGruppo.setEnabled(false);
-                    buttonIscriviti.setEnabled(false);
-                    buttonIscriviti.setText("iscritto ✓");
                 }
             }
             else
@@ -130,7 +139,38 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         buttonCancIscrizione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //ABBANDONA GRUPPO
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoCasoDiStudio.this);
 
+                builder.setTitle("Conferma");
+                builder.setMessage("Sei sicuro di voler abbandonare il caso di studio?");
+
+                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do something and close the dialog
+                        Boolean abbandonato = MainActivity.DB.abbandonaCasoDiStudio(list.get(position).get(7).toString());
+
+                        if(abbandonato)
+                        {
+                            toastMessage("Caso di studio abbandonato!");
+                            startActivity(new Intent(InfoCasoDiStudio.this, Home.class));
+                        }
+                        else {
+                            toastMessage("Qualcosa è andato storto!");
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
@@ -157,7 +197,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
                                     if(iscrizione)
                                     {
-                                        toastMessage("Modifiche salvate!");
+                                        toastMessage("Iscrizione effettuata!");
                                         onBackPressed();
 
                                     }

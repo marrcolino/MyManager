@@ -23,12 +23,6 @@
         android:label="@string/menu_cerca_casi"
         tools:layout="@layout/fragment_cerca_casi" />
 
-    <activity
-        android:id="@+id/nav_crea_gruppi"
-        android:name="com.example.mymanager.CreaGruppo"
-        android:label="@string/menu_crea_gruppo"
-        tools:layout="@layout/activity_crea_gruppo" />
-
     <fragment
         android:id="@+id/nav_groups"
         android:name="com.example.mymanager.ListaGruppiFragment"

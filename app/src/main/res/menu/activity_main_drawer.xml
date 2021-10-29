@@ -17,11 +17,6 @@
             android:icon="@drawable/ic_baseline_search_24"
             android:title="@string/menu_cerca_casi" />
         <item
-            android:id="@+id/nav_crea_gruppi"
-            android:icon="@drawable/ic_group_add"
-            android:title="@string/menu_crea_gruppo"
-            />
-        <item
             android:id="@+id/nav_groups"
             android:icon="@drawable/ic_groups"
             android:title="@string/menu_View_grups"
