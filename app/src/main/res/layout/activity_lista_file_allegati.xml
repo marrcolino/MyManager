@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -7,6 +7,24 @@
     android:padding="8dp"
     android:layout_height="wrap_content"
     tools:context=".Lista_file_allegati">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="0">
+
+    <!-- everything you already have -->
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_margin="1dp"
+        android:layout_weight="0"
+        android:background="#FFFFFF">
 
     <Button
         android:layout_width="100dp"
@@ -16,4 +34,22 @@
 
     </Button>
 
-</RelativeLayout>
+    </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="0"
+            android:background="#FFFFFF">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerviewFile"/>
+
+    </TableRow>
+
+    </TableLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

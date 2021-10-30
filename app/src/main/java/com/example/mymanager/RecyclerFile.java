@@ -3,6 +3,7 @@ package com.example.mymanager;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +31,18 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row_file_allegati,parent,false);
+        /*View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_row_file_allegati,parent,false);
+        return new RecyclerFile.ViewHolder(view);*/
+        View view = mInflater.inflate(R.layout.my_row_file_allegati, parent, false);
         return new RecyclerFile.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        Log.d("test", "onBindViewHolder: ci sono");
+        holder.mName.setText(list.get(position).get(0).toString());
+        holder.mLink.setText(list.get(position).get(0).toString());
         /*holder.mName.setText(list.get(position).toString());
         holder.mLink.setText(list.get(position).toString());
         holder.mDownload.setOnClickListener(new View.OnClickListener() {
@@ -58,16 +64,33 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
 
         downloadmanager.enqueue(request);
     }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
     public interface ItemClickListener {
+        void onItemClick(List casi, int position);
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView mName;TextView mLink;
+        Button mDownload;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mName=itemView.findViewById(R.id.name);
+            mLink=itemView.findViewById(R.id.link);
+            mDownload=itemView.findViewById(R.id.down);
+        }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+        @Override
+        public void onClick(View v) {
+
+        }
+    }
+
+    /*public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mName;TextView mLink;
         Button mDownload;
         public ViewHolder(@NonNull View view) {
@@ -76,5 +99,5 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
             mLink=itemView.findViewById(R.id.link);
             mDownload=itemView.findViewById(R.id.down);
         }
-    }
+    }*/
 }

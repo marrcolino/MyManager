@@ -1,7 +1,9 @@
 package com.example.mymanager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DownloadManager;
@@ -10,13 +12,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
@@ -30,6 +40,7 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
     StorageReference storageReference;
     Button download;
     public static Boolean galleria = false;
+    private ArrayList<List> list = new ArrayList<List>();
 
 
     @Override
@@ -44,7 +55,8 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        //METODO CHE RIEMPIE "list"
+        listAllPaginated("");
 
         /*recyclerView = findViewById(R.id.recyclerview);
         layoutManager = new LinearLayoutManager(this);
@@ -58,8 +70,55 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
                 download();
             }
         });
+
+        recyclerView = findViewById(R.id.recyclerviewFile);
+        layoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RecyclerFile(this, list);
+        recyclerView.setAdapter(adapter);
     }
 
+    public void listAllPaginated(@Nullable String pageToken) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference listRef = storage.getReference().child("test10/");
+
+        // Fetch the next page of results, using the pageToken if we have one.
+        Task<ListResult> listPageTask = pageToken != null
+                ? listRef.list(100, pageToken)
+                : listRef.list(100);
+
+        listPageTask
+                .addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                    @Override
+                    public void onSuccess(ListResult listResult) {
+                        List<StorageReference> prefixes = listResult.getPrefixes();
+                        List<StorageReference> items = listResult.getItems();
+
+                        // Process page of results
+                        // ...
+                        for(int i = 0; i < items.size(); i++)
+                        {
+                            List<String> arrlist = new ArrayList<String>();
+                            arrlist.add(items.get(i).getPath());
+                            arrlist.add(items.get(i).getPath());
+                            list.add(arrlist);
+                        }
+                        toastMessage(Integer.toString(list.size()) + " " + items.size());
+                        Log.d("test", "onSuccess: ci sono");
+
+                        // Recurse onto next page
+                        if (listResult.getPageToken() != null) {
+                            listAllPaginated(listResult.getPageToken());
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Uh-oh, an error occurred.
+            }
+        });
+    }
 
     private void download() {
 
@@ -105,5 +164,18 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(List casi, int position) {
+
+    }
+
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }
