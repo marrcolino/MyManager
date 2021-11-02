@@ -31,7 +31,7 @@
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
                     android:background="@color/blue_app"
-                    android:text="Crea gruppo"
+                    android:text="@string/create_group"
                     android:textColor="#FFFFFF"
                     android:textSize="20dp"/>
             </TableRow>

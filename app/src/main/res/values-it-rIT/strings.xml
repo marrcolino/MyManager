@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyManager</string>
+    <string name="insert_name_team">Inserisci il nome del gruppo</string>
+    <string name="enter_name_case_study">Inserisci il nome del caso di studio</string>
+    <string name="enter_name_exam">Inserisci il nome dell\'esame</string>
+    <string name="enter_cs_info">Inserisci informazioni sul caso di studio</string>
+    <string name="creates">Crea</string>
+    <string name="enter_students_freshman">Inserisci la matricola dello studente</string>
+    <string name="create_group">Crea gruppo</string>
+    <string name="enter_name_group_subscribe">Inserisci il nome del gruppo da iscrivere</string>
+    <string name="subscribe">iscriviti</string>
+    <string name="cs_name">Nome caso di studio</string>
+    <string name="exam_name">Nome esame</string>
+    <string name="prof_name">Nome prof</string>
+    <string name="group_name">Nome gruppo</string>
+    <string name="description">Descrizione</string>
+    <string name="abandons">Abbandona</string>
+    <string name="add_files">Aggiungi file</string>
+    <string name="case_study">Caso di studio</string>
+    <string name="creator_name">Nome creatore</string>
+    <string name="participant_name">Nome partecipante</string>
+    <string name="save_changes">Salva modifiche</string>
+    <string name="delete_group">Cancella gruppo</string>
+    <string name="leave_group">Abbandona gruppo</string>
+    <string name="list_registered_groups">Lista gruppi iscritti</string>
+    <string name="change_cs_name">Modifica nome caso di studio</string>
+    <string name="change_exam_name">Modifica nome esame</string>
+    <string name="edit_cs_info">Modifica informazioni sul caso di studio</string>
+    <string name="delete_cs">Elimina caso di studio</string>
+    <string name="enter_freshman">Inserisci la matricola</string>
+    <string name="enter_pass">Inserisci la password</string>
+    <string name="registered">Registrati</string>
+    <string name="click_here">Clicca qui per andare avanti</string>
+    <string name="enter_email">Inserisci l\'email</string>
+    <string name="name">Nome</string>
+    <string name="surname">Cognome</string>
+    <string name="date_birth">Data di nascita</string>
+    <string name="freshman">Matricola</string>
+    <string name="enter_n_e_p">Inserisci nome, esame o professore</string>
+    <string name="search">Cerca</string>
+</resources>
