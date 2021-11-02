@@ -6,6 +6,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -30,6 +32,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,6 +50,11 @@ public class InfoCasoDiStudio extends AppCompatActivity {
     private Button inserisci, buttonCancIscrizione, buttonIscriviti;
     private EditText editTextIscriviGruppo;
     Uri pdfUri;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerFile adapter;
+    private String nomeCartella = "";
+    private ArrayList<List> lista = new ArrayList<List>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +68,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        storageReference = FirebaseStorage.getInstance().getReference();
+
 
         textViewNomeCorso = (TextView)findViewById(R.id.textViewNomeCaso);
         textViewEsame = (TextView)findViewById(R.id.textViewEsame);
@@ -73,10 +81,16 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         buttonCancIscrizione = (Button)findViewById(R.id.buttonCancIscrizione);
         buttonIscriviti = (Button)findViewById(R.id.buttonIscriviti);
 
+        recyclerView = findViewById(R.id.recyclerviewFile);
+        layoutManager = new LinearLayoutManager(this);
 
+        recyclerView.setLayoutManager(layoutManager);
+
+        buildListData();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            nomeCartella = extras.getString("key");
             String call = "";
             int index = 0;
             index = extras.getString("key").indexOf('$');
@@ -238,6 +252,39 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void buildListData() {
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference listRef = storage.getReference().child(nomeCartella+"/");
+        listRef.listAll()
+                .addOnSuccessListener(new OnSuccessListener<ListResult>() {
+                    @Override
+                    public void onSuccess(ListResult listResult) {
+                        for (StorageReference prefix : listResult.getPrefixes()) {
+                            // All the prefixes under listRef.
+                            // You may call listAll() recursively on them.
+                        }
+
+                        for (StorageReference item : listResult.getItems()) {
+                            // All the items under listRef.
+                            List<String> arrlist = new ArrayList<String>();
+                            arrlist.add(item.getName());
+                            arrlist.add(nomeCartella);
+                            lista.add(arrlist);
+                        }
+                        adapter = new RecyclerFile(InfoCasoDiStudio.this, lista);
+                        recyclerView.setAdapter(adapter);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Uh-oh, an error occurred!
+                    }
+                });
     }
 
     @SuppressLint("MissingSuperCall")
