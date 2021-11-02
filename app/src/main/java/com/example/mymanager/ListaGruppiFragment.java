@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class ListaGruppiFragment extends Fragment implements RecyclerAdapterGrup
     private RecyclerAdapterGruppi adapter;
     private ArrayList<List> list = new ArrayList<List>();
     private Button buttonListaCreaGruppo;
+    private TextView textViewListaVuotaGruppi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +46,13 @@ public class ListaGruppiFragment extends Fragment implements RecyclerAdapterGrup
 
         buildListData();
         initRecyclerView(view);
+
+        if(!list.isEmpty())
+        {
+            textViewListaVuotaGruppi = (TextView) view.findViewById(R.id.textViewListaVuotaGruppi);
+            textViewListaVuotaGruppi.setVisibility(View.GONE);
+        }
+
         return view;
     }
 

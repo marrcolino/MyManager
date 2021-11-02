@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerAdapter adapter;
     private ArrayList<List> list = new ArrayList<List>();
+    private TextView textViewListaVuotaHome;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
@@ -31,6 +33,12 @@ public class HomeFragment extends Fragment implements RecyclerAdapter.ItemClickL
 
         buildListData();
         initRecyclerView(view);
+
+        if(!list.isEmpty())
+        {
+            textViewListaVuotaHome = (TextView)view.findViewById(R.id.textViewListaVuotaHome);
+            textViewListaVuotaHome.setVisibility(View.GONE);
+        }
 
         //RICARICO LA VARIABILE GLOBALE
         Cursor cursor = MainActivity.DB.login(MainActivity.utenteLoggato.matricola, MainActivity.utenteLoggato.password);

@@ -37,6 +37,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
     private ArrayList<List> list = new ArrayList<List>();
     private int position;
-    TextView textViewNomeCorso, textViewEsame, textViewDescrizione, textViewProf, textViewInfoNomeGruppo;
+    TextView textViewNomeCorso, textViewEsame, textViewDescrizione, textViewProf, textViewInfoNomeGruppo, textViewFiles, textViewListaVuotaFileCasi;
     private String chiamante = "";
     private StorageReference storageReference;
     private Button inserisci, buttonCancIscrizione, buttonIscriviti;
@@ -68,14 +69,14 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         textViewNomeCorso = (TextView)findViewById(R.id.textViewNomeCaso);
         textViewEsame = (TextView)findViewById(R.id.textViewEsame);
         textViewDescrizione = (TextView)findViewById(R.id.textViewDescrizione);
         textViewProf = (TextView)findViewById(R.id.textViewProf);
         textViewInfoNomeGruppo = (TextView)findViewById(R.id.textViewInfoNomeGruppo);
         editTextIscriviGruppo = (EditText)findViewById(R.id.editTextIscriviGruppo);
+        textViewFiles = (TextView)findViewById(R.id.textViewFiles);
+        textViewListaVuotaFileCasi = (TextView)findViewById(R.id.textViewListaVuotaFileCasi);
 
         inserisci = (Button)findViewById(R.id.inseriscifile);
         buttonCancIscrizione = (Button)findViewById(R.id.buttonCancIscrizione);
@@ -83,14 +84,11 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerviewFile);
         layoutManager = new LinearLayoutManager(this);
-
         recyclerView.setLayoutManager(layoutManager);
-
-        buildListData();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            nomeCartella = extras.getString("key");
+            //nomeCartella = extras.getString("key");
             String call = "";
             int index = 0;
             index = extras.getString("key").indexOf('$');
@@ -104,6 +102,8 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
                 buttonCancIscrizione.setVisibility(View.GONE);
                 inserisci.setVisibility(View.GONE);
+                textViewFiles.setVisibility(View.GONE);
+                textViewListaVuotaFileCasi.setVisibility(View.GONE);
                 //textViewInfoNomeGruppo.setVisibility(View.GONE);
 
                 if(MainActivity.utenteLoggato.matricola.charAt(0) =='0')
@@ -118,6 +118,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                     {
                         while (cursorNome.moveToNext()) {
                             textViewInfoNomeGruppo.setText("Nome gruppo : " + cursorNome.getString(0));
+                            //nomeCartella = cursorNome.getString(0);
                         }
                         editTextIscriviGruppo.setEnabled(false);
                         buttonIscriviti.setEnabled(false);
@@ -132,11 +133,10 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
                 editTextIscriviGruppo.setVisibility(View.GONE);
                 buttonIscriviti.setVisibility(View.GONE);
-                /*if()
-                {
-
-                }*/
+                buildListFiles();
             }
+
+
         }
 
         inserisci.setOnClickListener(new View.OnClickListener() {
@@ -200,39 +200,46 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                     {
                         if(MainActivity.DB.checkCreatoreGruppo(MainActivity.utenteLoggato.matricola, nomeGruppo))
                         {
-                            //ISCRIZIONE
-                            AlertDialog.Builder builder = new AlertDialog.Builder(InfoCasoDiStudio.this);
+                            if(!MainActivity.DB.checkGruppoOccupato(nomeGruppo))
+                            {
+                                //ISCRIZIONE
+                                AlertDialog.Builder builder = new AlertDialog.Builder(InfoCasoDiStudio.this);
 
-                            builder.setTitle("Conferma");
-                            builder.setMessage("Sei sicuro di voler iscrivere il gruppo?");
+                                builder.setTitle("Conferma");
+                                builder.setMessage("Sei sicuro di voler iscrivere il gruppo?");
 
-                            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Do something and close the dialog
-                                    Boolean iscrizione = MainActivity.DB.updateIscrizioneGruppo(nomeGruppo, list.get(position).get(0).toString());
+                                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Do something and close the dialog
+                                        Boolean iscrizione = MainActivity.DB.updateIscrizioneGruppo(nomeGruppo, list.get(position).get(0).toString());
 
-                                    if(iscrizione)
-                                    {
-                                        toastMessage("Iscrizione effettuata!");
-                                        onBackPressed();
+                                        if(iscrizione)
+                                        {
+                                            toastMessage("Iscrizione effettuata!");
+                                            onBackPressed();
 
+                                        }
+                                        else {
+                                            toastMessage("Qualcosa è andato storto!");
+                                        }
                                     }
-                                    else {
-                                        toastMessage("Qualcosa è andato storto!");
+                                });
+
+                                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Do nothing
+                                        dialog.dismiss();
                                     }
-                                }
-                            });
+                                });
 
-                            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Do nothing
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            AlertDialog alert = builder.create();
-                            alert.show();
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                            else
+                            {
+                                toastMessage("Gruppo già iscritto ad un altro caso di studio!");
+                            }
                         }
                         else
                         {
@@ -255,7 +262,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
 
     }
 
-    private void buildListData() {
+    private void buildListFiles() {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference listRef = storage.getReference().child(nomeCartella+"/");
@@ -275,6 +282,12 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                             arrlist.add(nomeCartella);
                             lista.add(arrlist);
                         }
+
+                        if(!lista.isEmpty())
+                        {
+                            textViewListaVuotaFileCasi.setVisibility(View.GONE);
+                        }
+
                         adapter = new RecyclerFile(InfoCasoDiStudio.this, lista);
                         recyclerView.setAdapter(adapter);
                     }
@@ -311,6 +324,9 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         if (requestCode == 86 && resultCode == RESULT_OK && data != null) {
 
             pdfUri = data.getData();
+            File myFile = new File(pdfUri.toString());
+            String path = myFile.getName();
+            toastMessage(pdfUri.toString());
 
         } else {
             Toast.makeText(InfoCasoDiStudio.this, "non hai selezionato nessun file", Toast.LENGTH_SHORT).show();
@@ -379,6 +395,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
             textViewDescrizione.setText("Descrizione : " + list.get(position).get(2).toString());
             textViewProf.setText("Nome professore : " + list.get(position).get(5).toString());
             textViewInfoNomeGruppo.setText("Nome gruppo : " + list.get(position).get(7).toString());
+            nomeCartella = list.get(position).get(7).toString();
         }
     }
 

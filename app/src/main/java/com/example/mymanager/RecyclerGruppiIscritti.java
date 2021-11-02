@@ -44,7 +44,6 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         holder.textViewNomeGruppo.setText(list.get(position).get(1).toString());
         listInfo = new ArrayList<>();
         holder.listaFile.setOnClickListener(new View.OnClickListener() {
@@ -81,11 +80,21 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
             }
         }
 
-        holder.textViewPart1.setText(list.get(position).get(2).toString() + " " + listInfo.get(positionInfo0).get(0).toString()+ " " + listInfo.get(positionInfo0).get(1).toString()+ " " + listInfo.get(positionInfo0).get(2).toString());
-        holder.textViewPart2.setText(list.get(position).get(3).toString() + " " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()+ " " + listInfo.get(positionInfo1).get(2).toString());
-        holder.textViewPart3.setText(list.get(position).get(4).toString() + " " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()+ " " + listInfo.get(positionInfo2).get(2).toString());
-        holder.textViewPart4.setText(list.get(position).get(5).toString() + " " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()+ " " + listInfo.get(positionInfo3).get(2).toString());
+        holder.textViewPart1.setText("Matricola : "+list.get(position).get(2).toString()
+                + "\nNome : " + listInfo.get(positionInfo0).get(0).toString() + " " + listInfo.get(positionInfo0).get(1).toString()
+                + "\nEmail : " + listInfo.get(positionInfo0).get(2).toString());
 
+        holder.textViewPart2.setText("Matricola : "+list.get(position).get(3).toString()
+                + "\nNome : " + listInfo.get(positionInfo1).get(0).toString()+ " " + listInfo.get(positionInfo1).get(1).toString()
+                + "\nEmail : " + listInfo.get(positionInfo1).get(2).toString());
+
+        holder.textViewPart3.setText("Matricola : "+list.get(position).get(4).toString()
+                + "\nNome : " + listInfo.get(positionInfo2).get(0).toString()+ " " + listInfo.get(positionInfo2).get(1).toString()
+                + "\nEmail : " + listInfo.get(positionInfo2).get(2).toString());
+
+        holder.textViewPart4.setText("Matricola : "+list.get(position).get(5).toString()
+                + "\nNome : " + listInfo.get(positionInfo3).get(0).toString()+ " " + listInfo.get(positionInfo3).get(1).toString()
+                + "\nEmail : " + listInfo.get(positionInfo3).get(2).toString());
     }
 
     @Override
@@ -105,7 +114,6 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
             textViewPart3 = itemView.findViewById(R.id.textViewPart3);
             textViewPart4 = itemView.findViewById(R.id.textViewPart4);
             listaFile = itemView.findViewById(R.id.buttonVediAllegati);
-
         }
 
         @Override

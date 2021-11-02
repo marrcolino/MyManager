@@ -173,6 +173,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Boolean updateAnnullaIscrizioneGruppocancellato(String idCasoStudio) {
+        int result;
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("IDCasoStudio", "");
+        result = DB.update("Gruppo", contentValues, "IDCasoStudio=?", new String[]{idCasoStudio});
+        return result!= -1;
+    }
+
     public Boolean deleteGruppo(String id){
         SQLiteDatabase DB = this.getWritableDatabase();
         long result = DB.delete("Gruppo",  "ID=?", new String[]{id});
@@ -262,16 +271,28 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Cursor checkGruppoOccupato(String nome) {
+    public Boolean checkGruppoOccupato(String nome) {
         String query = "SELECT IDCasoStudio FROM Gruppo WHERE nome = '"+ nome +"'";
         SQLiteDatabase DB = this.getReadableDatabase();
-
+        String id = "";
         Cursor cursor = null;
         if(DB != null){
             cursor = DB.rawQuery(query, null);
         }
 
-        return cursor;
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()) {
+                id = cursor.getString(0);
+            }
+            if(id.equals(""))
+                return false;
+            else
+                return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public Cursor listaCasiProf(String matricola) {

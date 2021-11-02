@@ -152,8 +152,9 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
     private void eliminaCasoDiStudio()
     {
         boolean deleteCaso = MainActivity.DB.deleteCasoDiStudio(list.get(position).get(0).toString());
+        boolean deleteAggiornamentoGruppo = MainActivity.DB.updateAnnullaIscrizioneGruppocancellato(list.get(position).get(0).toString());
 
-        if (deleteCaso) {
+        if (deleteCaso && deleteAggiornamentoGruppo) {
             toastMessage("Caso di studio eliminato!");
         } else {
             toastMessage("Something went wrong");

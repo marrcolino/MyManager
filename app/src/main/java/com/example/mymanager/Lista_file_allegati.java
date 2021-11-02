@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +43,7 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
     public static Boolean galleria = false;
     private ArrayList<List> list = new ArrayList<List>();
     private String nomeCartella = "";
+    TextView textViewListaVuotaFileAllegati;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 download();
             }
         });
@@ -74,6 +77,12 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         recyclerView.setLayoutManager(layoutManager);
 
         buildListData();
+
+        if(!list.isEmpty())
+        {
+            textViewListaVuotaFileAllegati = (TextView)findViewById(R.id.textViewListaVuotaFileAllegati);
+            textViewListaVuotaFileAllegati.setVisibility(View.GONE);
+        }
     }
 
     private void buildListData() {

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
     private RecyclerGruppiIscritti adapter;
     private ArrayList<List> list = new ArrayList<List>();
     private ArrayList<List> listInfo = new ArrayList<List>();
+    private TextView textViewListaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,12 @@ public class Lista_gruppi_iscritti extends AppCompatActivity implements Recycler
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         buildListData();
+
+        if(!list.isEmpty())
+        {
+            textViewListaVuota = (TextView)findViewById(R.id.textViewListaVuota);
+            textViewListaVuota.setVisibility(View.GONE);
+        }
 
         recyclerView = findViewById(R.id.recyclerview);
         layoutManager = new LinearLayoutManager(this);

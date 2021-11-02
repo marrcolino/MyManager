@@ -20,6 +20,27 @@
 
     <!-- everything you already have -->
 
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="0"
+            android:background="#FFFFFF">
+
+            <TextView
+                android:id="@+id/textViewListaVuotaFileAllegati"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:text="Nessun documento trovato!"
+                android:textColor="@color/blue_app"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </TableRow>
+
     <TableRow
         android:layout_width="fill_parent"
         android:layout_margin="1dp"

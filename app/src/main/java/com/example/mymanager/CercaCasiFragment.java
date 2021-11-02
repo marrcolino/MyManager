@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -35,6 +36,7 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
     private EditText editTextCercaCaso;
     private Button buttonCercaCaso;
     public static String barraDiRicerca;
+    private TextView textViewListaVuotaCercaCasi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
 
         editTextCercaCaso = (EditText) view.findViewById(R.id.editTextCercaCaso);
         buttonCercaCaso = (Button) view.findViewById(R.id.buttonCercaCaso);
+        textViewListaVuotaCercaCasi = (TextView)view.findViewById(R.id.textViewListaVuotaCercaCasi);
 
         buttonCercaCaso.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,16 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
                 list.clear();
                 buildListData();
                 initRecyclerView(view);
+
+                if(!list.isEmpty())
+                {
+                    textViewListaVuotaCercaCasi.setVisibility(View.GONE);
+                }
+                else
+                {
+                    textViewListaVuotaCercaCasi.setVisibility(View.VISIBLE);
+                }
+
                 //CODICE PER CHIUDERE LA TASTIERA
                 InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

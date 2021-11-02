@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp"
+        android:layout_height="wrap_content"
         android:padding="12dp">
 
         <TextView
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/textViewPart1"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -41,7 +41,8 @@
         <TextView
             android:id="@+id/textViewPart2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:text="Part12"
@@ -54,8 +55,8 @@
         <TextView
             android:id="@+id/textViewPart3"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:text="Part3"
             android:textColor="@color/blue_app"
@@ -67,8 +68,8 @@
         <TextView
             android:id="@+id/textViewPart4"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:text="Part4"
             android:textColor="@color/blue_app"
@@ -79,11 +80,14 @@
 
         <Button
             android:id="@+id/buttonVediAllegati"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_margin="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="#0094FF"
-            android:text="Vedi Allegati"
+            android:text="Mostra documenti"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
