@@ -9,12 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> {
 
@@ -24,8 +30,6 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
     public RecyclerFile(Context context , ArrayList<List> list) {
         this.mInflater = LayoutInflater.from(context);
         this.list=list;
-
-
     }
 
     @NonNull
@@ -39,22 +43,27 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        Log.d("test", "onBindViewHolder: ci sono");
-        holder.mName.setText(list.get(position).get(0).toString());
-        holder.mLink.setText(list.get(position).get(0).toString());
-        /*holder.mName.setText(list.get(position).toString());
-        holder.mLink.setText(list.get(position).toString());
+        String nomeFile = list.get(position).get(0).toString();
+        String nomeCartella = list.get(position).get(1).toString();
+        holder.mName.setText(nomeFile);
         holder.mDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadFile(holder.mName.getContext(),list.get(position).toString(),".pdf",DIRECTORY_DOWNLOADS,list.get(position).toString());
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child(nomeCartella+ "/" + nomeFile);
+                storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    String url = uri.toString();
+                    String formato = "";//url.substring(url.lastIndexOf('.')-1);
+                    //String formato = url.substring(url.lastIndexOf('.')-1);
+                    //toastMessage(holder.mName.getContext(), url);
+                    downloadFile(holder.mName.getContext(), nomeFile, formato, DIRECTORY_DOWNLOADS, url);
+                }).addOnFailureListener(e -> {
+                });
+
             }
-        });*/
+        });
     }
 
     public void downloadFile(Context context, String fileName, String fileExtension, String destinationDirectory, String url) {
-
         DownloadManager downloadmanager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse(url);
         DownloadManager.Request request = new DownloadManager.Request(uri);
@@ -75,13 +84,13 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView mName;TextView mLink;
+        TextView mName;//TextView mLink;
         Button mDownload;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mName=itemView.findViewById(R.id.name);
-            mLink=itemView.findViewById(R.id.link);
-            mDownload=itemView.findViewById(R.id.down);
+            mName=itemView.findViewById(R.id.TextViewNomeFile);
+            //mLink=itemView.findViewById(R.id.link);
+            mDownload=itemView.findViewById(R.id.buttonScarica);
         }
 
         @Override
@@ -90,14 +99,7 @@ public class RecyclerFile extends RecyclerView.Adapter<RecyclerFile.ViewHolder> 
         }
     }
 
-    /*public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mName;TextView mLink;
-        Button mDownload;
-        public ViewHolder(@NonNull View view) {
-            super(view);
-            mName=itemView.findViewById(R.id.name);
-            mLink=itemView.findViewById(R.id.link);
-            mDownload=itemView.findViewById(R.id.down);
-        }
-    }*/
+    private void toastMessage(Context context, String testo){
+        Toast.makeText(context, testo, Toast.LENGTH_SHORT).show();
+    }
 }

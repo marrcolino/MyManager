@@ -50,7 +50,8 @@ public class RecyclerGruppiIscritti extends RecyclerView.Adapter<RecyclerGruppiI
         holder.listaFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(),Lista_file_allegati.class);
+                Intent i = new Intent(v.getContext(), Lista_file_allegati.class);
+                i.putExtra("key", list.get(position).get(1).toString());
                 v.getContext().startActivity(i);
             }
         });

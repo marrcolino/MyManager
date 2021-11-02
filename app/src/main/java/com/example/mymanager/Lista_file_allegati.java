@@ -41,7 +41,7 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
     Button download;
     public static Boolean galleria = false;
     private ArrayList<List> list = new ArrayList<List>();
-
+    private String nomeCartella = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,73 +55,59 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //METODO CHE RIEMPIE "list"
-        listAllPaginated("");
-
-        /*recyclerView = findViewById(R.id.recyclerview);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);*/
-
         download = findViewById(R.id.download);
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 download();
             }
         });
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            nomeCartella = extras.getString("key");
+            //The key argument here must match that used in the other activity
+        }
+
         recyclerView = findViewById(R.id.recyclerviewFile);
         layoutManager = new LinearLayoutManager(this);
-
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecyclerFile(this, list);
-        recyclerView.setAdapter(adapter);
+
+        buildListData();
     }
 
-    public void listAllPaginated(@Nullable String pageToken) {
+    private void buildListData() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference listRef = storage.getReference().child("test10/");
-
-        // Fetch the next page of results, using the pageToken if we have one.
-        Task<ListResult> listPageTask = pageToken != null
-                ? listRef.list(100, pageToken)
-                : listRef.list(100);
-
-        listPageTask
+        StorageReference listRef = storage.getReference().child(nomeCartella+"/");
+        listRef.listAll()
                 .addOnSuccessListener(new OnSuccessListener<ListResult>() {
                     @Override
                     public void onSuccess(ListResult listResult) {
-                        List<StorageReference> prefixes = listResult.getPrefixes();
-                        List<StorageReference> items = listResult.getItems();
+                        for (StorageReference prefix : listResult.getPrefixes()) {
+                            // All the prefixes under listRef.
+                            // You may call listAll() recursively on them.
+                        }
 
-                        // Process page of results
-                        // ...
-                        for(int i = 0; i < items.size(); i++)
-                        {
+                        for (StorageReference item : listResult.getItems()) {
+                            // All the items under listRef.
                             List<String> arrlist = new ArrayList<String>();
-                            arrlist.add(items.get(i).getPath());
-                            arrlist.add(items.get(i).getPath());
+                            arrlist.add(item.getName());
+                            arrlist.add(nomeCartella);
                             list.add(arrlist);
                         }
-                        toastMessage(Integer.toString(list.size()) + " " + items.size());
-                        Log.d("test", "onSuccess: ci sono");
-
-                        // Recurse onto next page
-                        if (listResult.getPageToken() != null) {
-                            listAllPaginated(listResult.getPageToken());
-                        }
+                        adapter = new RecyclerFile(Lista_file_allegati.this, list);
+                        recyclerView.setAdapter(adapter);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // Uh-oh, an error occurred.
-            }
-        });
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Uh-oh, an error occurred!
+                    }
+                });
     }
 
     private void download() {
-
         ProgressDialog pd = new ProgressDialog(Lista_file_allegati.this);
         pd.setTitle("download file");
         pd.setMessage("Downloading Please Wait!");
