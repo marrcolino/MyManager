@@ -78,6 +78,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:onClick="onClick"/>
 
+            <TextView
+                android:id="@+id/textRecupero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:clickable="true"
+                android:text="@string/recupero_password"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <Button
                 android:id="@+id/buttonLogin"
                 android:layout_width="200dp"

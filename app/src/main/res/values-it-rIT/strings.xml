@@ -39,4 +39,6 @@
     <string name="freshman">Matricola</string>
     <string name="enter_n_e_p">Inserisci nome, esame o professore</string>
     <string name="search">Cerca</string>
+    <string name="recupero_password">Hai dimenticato la tua password?</string>
+    <string name="scrivi_email">Per favore invia un\'email a mymanager2021@gmail.com</string>
 </resources>

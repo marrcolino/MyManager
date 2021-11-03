@@ -21,12 +21,14 @@ public class Login extends AppCompatActivity {
 
     Button buttonLogin;
     EditText editTextMatricola, editTextPassword;
+    TextView recupero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        recupero = findViewById(R.id.textRecupero);
         //TESTO SOTTOLINEATO
         TextView textView = findViewById(R.id.textViewRegistrati);
         SpannableString content = new SpannableString( "Non possiedi un account? Registrati" );
@@ -41,7 +43,12 @@ public class Login extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         buttonLogin = findViewById(R.id.buttonLogin);
-
+        recupero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recupero.setText(getString(R.string.scrivi_email));
+            }
+        });
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
