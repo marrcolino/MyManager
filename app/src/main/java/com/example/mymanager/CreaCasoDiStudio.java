@@ -3,6 +3,8 @@ package com.example.mymanager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
@@ -24,6 +26,8 @@ public class CreaCasoDiStudio extends AppCompatActivity {
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Crea un caso di studio </font>"));
         // Customize the back button
+        //COLOR ACTION BAR
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0094FF")));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

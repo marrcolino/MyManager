@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -39,7 +41,6 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
     StorageReference reference;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
-    Button download;
     public static Boolean galleria = false;
     private ArrayList<List> list = new ArrayList<List>();
     private String nomeCartella = "";
@@ -54,17 +55,11 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> File allegati </font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        //COLOR ACTION BAR
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0094FF")));
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        download = findViewById(R.id.download);
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                download();
-            }
-        });
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -77,12 +72,6 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         recyclerView.setLayoutManager(layoutManager);
 
         buildListData();
-
-        if(!list.isEmpty())
-        {
-            textViewListaVuotaFileAllegati = (TextView)findViewById(R.id.textViewListaVuotaFileAllegati);
-            textViewListaVuotaFileAllegati.setVisibility(View.GONE);
-        }
     }
 
     private void buildListData() {
@@ -104,6 +93,13 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
                             arrlist.add(nomeCartella);
                             list.add(arrlist);
                         }
+
+                        if(!list.isEmpty())
+                        {
+                            textViewListaVuotaFileAllegati = (TextView)findViewById(R.id.textViewListaVuotaFileAllegati);
+                            textViewListaVuotaFileAllegati.setVisibility(View.GONE);
+                        }
+
                         adapter = new RecyclerFile(Lista_file_allegati.this, list);
                         recyclerView.setAdapter(adapter);
                     }

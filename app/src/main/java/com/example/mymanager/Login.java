@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableString;
@@ -39,8 +41,11 @@ public class Login extends AppCompatActivity {
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Login </font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        //COLOR ACTION BAR
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0094FF")));
         // showing the back button in action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(R.color.blue_app));
 
         buttonLogin = findViewById(R.id.buttonLogin);
         recupero.setOnClickListener(new View.OnClickListener() {

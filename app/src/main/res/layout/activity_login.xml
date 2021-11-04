@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0094FF"
+    android:background="@color/blue_app"
     tools:context=".Login">
 
     <ScrollView
@@ -43,7 +43,8 @@
                 android:padding="10dp"
                 android:inputType="number"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="@color/blue_app"
+                android:textColorHint="@color/blue_app"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -59,7 +60,8 @@
                 android:padding="10dp"
                 android:inputType="textPassword"
                 android:shadowColor="@color/black"
-                android:textColor="#0094FF"
+                android:textColor="@color/blue_app"
+                android:textColorHint="@color/blue_app"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent" />
