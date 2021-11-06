@@ -24,7 +24,7 @@ public class CreaGruppo extends AppCompatActivity {
         setContentView(R.layout.activity_crea_gruppo);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Crea un caso di studio </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.crea_grup) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -52,11 +52,11 @@ public class CreaGruppo extends AppCompatActivity {
 
                 if(nome.isEmpty()){
                     campiVuoti = true;
-                    editTextNome.setError("Riempire il campo!");
+                    editTextNome.setError(getString(R.string.fill_field));
                 }
                 if(part2.isEmpty()){
                     campiVuoti = true;
-                    editTextPart2.setError("Riempire il campo!");
+                    editTextPart2.setError(getString(R.string.fill_field));
                 }
 
 
@@ -65,11 +65,11 @@ public class CreaGruppo extends AppCompatActivity {
                     //toastMessage(part3 + " " + part4);
                     if(part3.isEmpty())
                     {
-                        part3 = "vuoto";
+                        part3 = getString(R.string.empty);
                     }
                     if(part4.isEmpty())
                     {
-                        part4 = "vuoto";
+                        part4 = getString(R.string.empty);
                     }
 
                     if(!MainActivity.DB.checkNomeGruppo(nome))
@@ -77,21 +77,21 @@ public class CreaGruppo extends AppCompatActivity {
                         boolean insertUser = MainActivity.DB.insertGruppo(nome, partCreatore, part2, part3, part4);
 
                         if (insertUser) {
-                            toastMessage("Creazione gruppo completata!");
+                            toastMessage(getString(R.string.group_crea));
                             editTextNome.setText("");
                             editTextPart2.setText("");
                             editTextPart3.setText("");
                             editTextPart4.setText("");
                         } else {
-                            toastMessage("Something went wrong");
+                            toastMessage(getString(R.string.some_wrong));
                         }
                     }
                     else
                     {
-                        toastMessage("Nome gruppo già esistente!");
+                        toastMessage(getString(R.string.group_name_alrea));
                     }
                 } else {
-                    toastMessage("Riempire almeno i primi due campi!");
+                    toastMessage(getString(R.string.fill_two_fiel));
                 }
             }
         });

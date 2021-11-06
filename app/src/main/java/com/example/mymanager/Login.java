@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
         recupero = findViewById(R.id.textRecupero);
         //TESTO SOTTOLINEATO
         TextView textView = findViewById(R.id.textViewRegistrati);
-        SpannableString content = new SpannableString( "Non possiedi un account? Registrati" );
+        SpannableString content = new SpannableString( getString(R.string.not_have_account) );
         content.setSpan( new UnderlineSpan() , 0 , content.length() , 0 );
         textView.setText(content);
 
@@ -67,18 +67,18 @@ public class Login extends AppCompatActivity {
 
                 if(matricola.isEmpty()){
                     campiVuoti = true;
-                    editTextMatricola.setError("Riempire il campo!");
+                    editTextMatricola.setError(getString(R.string.fill_field));
                 }
                 if(password.isEmpty()){
                     campiVuoti = true;
-                    editTextPassword.setError("Riempire il campo!");
+                    editTextPassword.setError(getString(R.string.fill_field));
                 }
 
                 if (!campiVuoti) {
                     Cursor cursor = MainActivity.DB.login(matricola,password);
                     if(cursor.getCount()>0){
                         if(cursor.getCount()==0){
-                            toastMessage("ERRORE: Lista utente loggato vuota");
+                            toastMessage(getString(R.string.error_list));
 
                         }else {
                             while(cursor.moveToNext()) {
@@ -91,14 +91,14 @@ public class Login extends AppCompatActivity {
                             MainActivity.utenteLoggato.dataNascita=cursor.getString(5);
                             }
                         }
-                        toastMessage("Login riuscito!");
+                        toastMessage(getString(R.string.login_success));
                         startActivity(new Intent(Login.this, Home.class));
                     }else{
-                        toastMessage("Matricola o password errati!");
+                        toastMessage(getString(R.string.incorrect_fresh_pass));
                     }
 
                 } else {
-                    toastMessage("Riempire tutti i campi!");
+                    toastMessage(getString(R.string.fill_fields));
                 }
             }
         });

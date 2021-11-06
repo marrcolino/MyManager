@@ -52,7 +52,7 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
         setContentView(R.layout.activity_lista_file_allegati);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> File allegati </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.att_fil) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -115,7 +115,7 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
     private void download() {
         ProgressDialog pd = new ProgressDialog(Lista_file_allegati.this);
         pd.setTitle("download file");
-        pd.setMessage("Downloading Please Wait!");
+        pd.setMessage((getString(R.string.msg_down)));
         pd.setIndeterminate(true);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.show();
@@ -125,11 +125,11 @@ public class Lista_file_allegati extends AppCompatActivity implements RecyclerFi
             String url = uri.toString();
             downloadFile(Lista_file_allegati.this, "1006-3040-2-PB", "pdf", DIRECTORY_DOWNLOADS, url);
 
-            Toast.makeText(Lista_file_allegati.this, "Download Completed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Lista_file_allegati.this, (getString(R.string.down_comp)), Toast.LENGTH_SHORT).show();
             pd.dismiss();
         }).addOnFailureListener(e -> {
 
-            Toast.makeText(Lista_file_allegati.this, "Download Failed", Toast.LENGTH_LONG).show();
+            Toast.makeText(Lista_file_allegati.this, (getString(R.string.down_fail)), Toast.LENGTH_LONG).show();
             pd.dismiss();
 
         });

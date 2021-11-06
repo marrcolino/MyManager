@@ -44,7 +44,7 @@ public class AccountFragment extends Fragment {
 
         //TESTO SOTTOLINEATOO
         Button buttonView = (Button) view.findViewById(R.id.textViewCambiaImg);
-        SpannableString content = new SpannableString( "Cambia immagine del profilo" );
+        SpannableString content = new SpannableString( getString(R.string.change_picture) );
         content.setSpan( new UnderlineSpan() , 0 , content.length() , 0 );
         buttonView.setBackgroundColor(Color.WHITE);
         buttonView.setText(content);
@@ -55,8 +55,8 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 final AlertDialog alertDialog;
                 new AlertDialog.Builder(AccountFragment.super.getContext())
-                        .setTitle("Immagine mancante")
-                        .setMessage("Da dove vuoi prendere l'immagine per il tuo profilo?")
+                        .setTitle(getString(R.string.miss_image))
+                        .setMessage(getString(R.string.where_pic))
                         .setPositiveButton("Camera", new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which){
@@ -71,12 +71,12 @@ public class AccountFragment extends Fragment {
 
                             }
                         })
-                        .setNegativeButton("Galleria", new DialogInterface.OnClickListener() {
+                        .setNegativeButton( getString(R.string.gallery), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (ContextCompat.checkSelfPermission(AccountFragment.super.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
                                     Home.galleria = true;
-                                    Toast.makeText(AccountFragment.super.getActivity(), "hai gia accettato", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AccountFragment.super.getActivity(), getString(R.string.already_accept), Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                                     startActivityForResult(intent,3);
                                     dialog.dismiss();
@@ -133,27 +133,27 @@ public class AccountFragment extends Fragment {
 
                 if(email.isEmpty()){
                     campiVuoti = true;
-                    editTextEmail.setError("Riempire il campo!");
+                    editTextEmail.setError(getString(R.string.fill_field));
                 }
                 if(password.isEmpty()){
                     campiVuoti = true;
-                    editTextPassword.setError("Riempire il campo!");
+                    editTextPassword.setError(getString(R.string.fill_field));
                 }
                 if(nome.isEmpty()){
                     campiVuoti = true;
-                    editTextNome.setError("Riempire il campo!");
+                    editTextNome.setError(getString(R.string.fill_field));
                 }
                 if(cognome.isEmpty()){
                     campiVuoti = true;
-                    editTextCognome.setError("Riempire il campo!");
+                    editTextCognome.setError(getString(R.string.fill_field));
                 }
                 if(dataNascita.isEmpty()){
                     campiVuoti = true;
-                    editTextDataNascita.setError("Riempire il campo!");
+                    editTextDataNascita.setError(getString(R.string.fill_field));
                 }
                 if(matricola.isEmpty()){
                     campiVuoti = true;
-                    editTextMatricola.setError("Riempire il campo!");
+                    editTextMatricola.setError(getString(R.string.fill_field));
                 }
 
                 if (!campiVuoti) {
@@ -161,13 +161,13 @@ public class AccountFragment extends Fragment {
                     boolean insertUser = MainActivity.DB.updateUserData( matricola , nome ,  cognome ,  email ,  password ,  dataNascita);
 
                     if (insertUser) {
-                        toastMessage("Modifica completata!");
+                        toastMessage(getString(R.string.change_complet));
                     } else {
-                        toastMessage("Something went wrong");
+                        toastMessage(getString(R.string.some_wrong));
                     }
                     startActivity(new Intent(getActivity(), Home.class));
                 } else {
-                    toastMessage("Riempire tutti i campi!");
+                    toastMessage(getString(R.string.fill_fields));
                 }
 
             }
@@ -179,16 +179,16 @@ public class AccountFragment extends Fragment {
     private void requestCameraPermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(AccountFragment.super.getActivity(),Manifest.permission.CAMERA)){
             new AlertDialog.Builder(AccountFragment.super.getActivity())
-                    .setTitle("Permesso necessario")
-                    .setMessage("Questo permesso non è ancora stato accettato")
-                    .setPositiveButton("Accetta", new DialogInterface.OnClickListener(){
+                    .setTitle(getString(R.string.perm_requ))
+                    .setMessage(getString(R.string.perm_not_yet))
+                    .setPositiveButton(getString(R.string.accept), new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which){
                             ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_CODE);
 
                         }
                     })
-                    .setNegativeButton("Rifiuta", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getString(R.string.ref), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -202,16 +202,16 @@ public class AccountFragment extends Fragment {
     private void requestStoragePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(AccountFragment.super.getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)){
             new AlertDialog.Builder(AccountFragment.super.getActivity())
-                    .setTitle("Permesso necessario")
-                    .setMessage("Questo permesso non è ancora stato accettato")
-                    .setPositiveButton("Accetta", new DialogInterface.OnClickListener(){
+                    .setTitle(getString(R.string.perm_requ))
+                    .setMessage(getString(R.string.perm_not_yet))
+                    .setPositiveButton(getString(R.string.accept), new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialog, int which){
                             ActivityCompat.requestPermissions(AccountFragment.super.getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
                         }
                     })
-                    .setNegativeButton("Rifiuta", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getString(R.string.ref), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

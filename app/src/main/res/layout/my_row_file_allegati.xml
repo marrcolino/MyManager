@@ -15,7 +15,7 @@
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="nome file"
+            android:text="@string/file_name"
             android:textColor="@color/blue_app"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -24,11 +24,11 @@
 
         <Button
             android:id="@+id/buttonScarica"
-            android:layout_width="150dp"
+            android:layout_width="163dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:backgroundTint="#0094FF"
-            android:text="Scarica"
+            android:text="@string/down"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"

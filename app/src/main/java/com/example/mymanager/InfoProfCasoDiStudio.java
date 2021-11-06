@@ -37,7 +37,7 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
         setContentView(R.layout.activity_info_prof_caso_di_studio);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Dettagli caso di studio </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.cs_details) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -87,10 +87,10 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoProfCasoDiStudio.this);
 
-                builder.setTitle("Conferma");
-                builder.setMessage("Sei sicuro di voler eliminare il caso di studio?");
+                builder.setTitle((getString(R.string.conf)));
+                builder.setMessage((getString(R.string.sure_del_cs)));
 
-                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton((getString(R.string.yes)), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
@@ -129,27 +129,27 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
 
         if(esame.isEmpty()){
             campiVuoti = true;
-            editTextModNomeEsame.setError("Riempire il campo!");
+            editTextModNomeEsame.setError((getString(R.string.fill_field)));
         }
         if(descrizione.isEmpty()){
             campiVuoti = true;
-            editTextModDescrizione.setError("Riempire il campo!");
+            editTextModDescrizione.setError((getString(R.string.fill_field)));
         }
         if(nome.isEmpty()){
             campiVuoti = true;
-            editTextModNomeCaso.setError("Riempire il campo!");
+            editTextModNomeCaso.setError((getString(R.string.fill_field)));
         }
 
         if (!campiVuoti) {
             boolean updateInfo = MainActivity.DB.updateInfoProfCasiDiStudio(list.get(position).get(0).toString(), nome, descrizione, esame);
 
             if (updateInfo) {
-                toastMessage("Modifica completata!");
+                toastMessage((getString(R.string.change_complet)));
             } else {
-                toastMessage("Something went wrong");
+                toastMessage((getString(R.string.some_wrong)));
             }
         } else {
-            toastMessage("Riempire tutti i campi!");
+            toastMessage((getString(R.string.fill_fields)));
         }
     }
 
@@ -159,9 +159,9 @@ public class InfoProfCasoDiStudio extends AppCompatActivity {
         boolean deleteAggiornamentoGruppo = MainActivity.DB.updateAnnullaIscrizioneGruppocancellato(list.get(position).get(0).toString());
 
         if (deleteCaso && deleteAggiornamentoGruppo) {
-            toastMessage("Caso di studio eliminato!");
+            toastMessage((getString(R.string.cs_delete)));
         } else {
-            toastMessage("Something went wrong");
+            toastMessage((getString(R.string.some_wrong)));
         }
     }
 

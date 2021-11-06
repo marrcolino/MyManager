@@ -29,7 +29,7 @@
                 android:id="@+id/textViewListaVuotaFileAllegati"
                 android:layout_width="240dp"
                 android:layout_height="40dp"
-                android:text="Nessun documento trovato!"
+                android:text="@string/no_doc_f"
                 android:textColor="@color/blue_app"
                 android:textSize="20dp"
                 android:textStyle="bold"

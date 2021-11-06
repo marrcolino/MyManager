@@ -37,7 +37,7 @@ public class InfoGruppo extends AppCompatActivity {
         setContentView(R.layout.activity_info_gruppo);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Info gruppo </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.info_g) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -75,7 +75,7 @@ public class InfoGruppo extends AppCompatActivity {
         if(cursorNomeCaso.getCount() > 0)
         {
             while (cursorNomeCaso.moveToNext()) {
-                nomeCaso.setText("Caso di studio : " + cursorNomeCaso.getString(0));
+                nomeCaso.setText(getString(R.string.case_study) + cursorNomeCaso.getString(0));
             }
         }
 
@@ -107,7 +107,7 @@ public class InfoGruppo extends AppCompatActivity {
         }
 
         textViewCreatore = (TextView) findViewById(R.id.textViewCreatore);
-        textViewCreatore.setText("Creatore : "+listInfo.get(0).get(0).toString() + " " + listInfo.get(0).get(1).toString());
+        textViewCreatore.setText(getString(R.string.creator) +listInfo.get(0).get(0).toString() + " " + listInfo.get(0).get(1).toString());
         editTextCreatore = (EditText) findViewById(R.id.editTextCreatore);
         editTextCreatore.setText(list.get(position).get(2).toString());
 
@@ -158,7 +158,7 @@ public class InfoGruppo extends AppCompatActivity {
                         partecipante2 = part2.getText().toString();
                     }
                     else{
-                        part2.setError("Matricola insesistente!");
+                        part2.setError(getString(R.string.noex_fresh));
                         matricoleGiuste = false;
                     }
                 }
@@ -173,7 +173,7 @@ public class InfoGruppo extends AppCompatActivity {
                         partecipante3 = part3.getText().toString();
                     }
                     else{
-                        part3.setError("Matricola insesistente!");
+                        part3.setError(getString(R.string.noex_fresh));
                         matricoleGiuste = false;
                     }
                 }
@@ -188,7 +188,7 @@ public class InfoGruppo extends AppCompatActivity {
                         partecipante4 = part4.getText().toString();
                     }
                     else {
-                        part4.setError("Matricola insesistente!");
+                        part4.setError(getString(R.string.noex_fresh));
                         matricoleGiuste = false;
                     }
                 }
@@ -215,13 +215,13 @@ public class InfoGruppo extends AppCompatActivity {
                     }
 
                     if(updateGruppo)
-                        toastMessage("Modifiche salvate!");
+                        toastMessage(getString(R.string.saved_change));
                     else
-                        toastMessage("Qualcosa è andato storto!");
+                        toastMessage(getString(R.string.some_wrong));
                 }
                 else
                 {
-                    toastMessage("Una delle matricole è errata o uguale alle altre, oppure inserire almeno un partecipante!");
+                    toastMessage(getString(R.string.one_freshman_same_incorr));
                 }
             }
         });
@@ -231,10 +231,10 @@ public class InfoGruppo extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoGruppo.this);
 
-                builder.setTitle("Conferma");
-                builder.setMessage("Sei sicuro di voler abbandonare il gruppo?");
+                builder.setTitle(getString(R.string.conf));
+                builder.setMessage(getString(R.string.are_you_sure_leave_group));
 
-                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
@@ -254,13 +254,13 @@ public class InfoGruppo extends AppCompatActivity {
 
                         if(gruppoAbbandonato)
                         {
-                            toastMessage("Gruppo abbandonato!");
+                            toastMessage(getString(R.string.group_leaved));
                             dialog.dismiss();
                             startActivity(new Intent(InfoGruppo.this, Home.class));
                         }
                         else
                         {
-                            toastMessage("Something wrong!");
+                            toastMessage(getString(R.string.some_wrong));
                         }
                     }
                 });
@@ -285,10 +285,10 @@ public class InfoGruppo extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoGruppo.this);
 
-                builder.setTitle("Conferma");
-                builder.setMessage("Sei sicuro di voler cancellare il gruppo?");
+                builder.setTitle(getString(R.string.conf));
+                builder.setMessage(getString(R.string.sure_delete_group));
 
-                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
@@ -297,13 +297,13 @@ public class InfoGruppo extends AppCompatActivity {
 
                         if(gruppoCancellato)
                         {
-                            toastMessage("Gruppo cancellato!");
+                            toastMessage(getString(R.string.group_delet));
                             dialog.dismiss();
                             startActivity(new Intent(InfoGruppo.this, Home.class));
                         }
                         else
                         {
-                            toastMessage("Something wrong!");
+                            toastMessage(getString(R.string.some_wrong));
                         }
                     }
                 });

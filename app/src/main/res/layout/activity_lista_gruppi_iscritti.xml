@@ -30,7 +30,7 @@
                     android:id="@+id/textViewListaVuota"
                     android:layout_width="240dp"
                     android:layout_height="40dp"
-                    android:text="Nessun gruppo iscritto!"
+                    android:text="@string/no_reg_gro"
                     android:textColor="@color/blue_app"
                     android:textSize="20dp"
                     android:textStyle="bold"

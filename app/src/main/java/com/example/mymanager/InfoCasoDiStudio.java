@@ -65,7 +65,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         setContentView(R.layout.activity_info_caso_di_studio);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Dettagli caso di studio </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.cs_details) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -121,12 +121,12 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                     if(cursorNome.getCount()>0)
                     {
                         while (cursorNome.moveToNext()) {
-                            textViewInfoNomeGruppo.setText("Nome gruppo : " + cursorNome.getString(0));
+                            textViewInfoNomeGruppo.setText(getString(R.string.group_name) + cursorNome.getString(0));
                             //nomeCartella = cursorNome.getString(0);
                         }
                         editTextIscriviGruppo.setEnabled(false);
                         buttonIscriviti.setEnabled(false);
-                        buttonIscriviti.setText("iscritto ✓");
+                        buttonIscriviti.setText(getString(R.string.enroll));
                     }
                 }
             }
@@ -162,21 +162,21 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 //ABBANDONA GRUPPO
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoCasoDiStudio.this);
 
-                builder.setTitle("Conferma");
-                builder.setMessage("Sei sicuro di voler abbandonare il caso di studio?");
+                builder.setTitle(getString(R.string.conf));
+                builder.setMessage(getString(R.string.sure_leave_cs));
 
-                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do something and close the dialog
                         Boolean abbandonato = MainActivity.DB.abbandonaCasoDiStudio(list.get(position).get(7).toString());
 
                         if(abbandonato)
                         {
-                            toastMessage("Caso di studio abbandonato!");
+                            toastMessage(getString(R.string.leave_cs));
                             startActivity(new Intent(InfoCasoDiStudio.this, Home.class));
                         }
                         else {
-                            toastMessage("Qualcosa è andato storto!");
+                            toastMessage(getString(R.string.some_wrong));
                         }
                     }
                 });
@@ -209,22 +209,22 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                                 //ISCRIZIONE
                                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoCasoDiStudio.this);
 
-                                builder.setTitle("Conferma");
-                                builder.setMessage("Sei sicuro di voler iscrivere il gruppo?");
+                                builder.setTitle(getString(R.string.conf));
+                                builder.setMessage(getString(R.string.sure_join_group));
 
-                                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         // Do something and close the dialog
                                         Boolean iscrizione = MainActivity.DB.updateIscrizioneGruppo(nomeGruppo, list.get(position).get(0).toString());
 
                                         if(iscrizione)
                                         {
-                                            toastMessage("Iscrizione effettuata!");
+                                            toastMessage(getString(R.string.reg_made));
                                             onBackPressed();
 
                                         }
                                         else {
-                                            toastMessage("Qualcosa è andato storto!");
+                                            toastMessage(getString(R.string.some_wrong));
                                         }
                                     }
                                 });
@@ -242,23 +242,23 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                             }
                             else
                             {
-                                toastMessage("Gruppo già iscritto ad un altro caso di studio!");
+                                toastMessage(getString(R.string.group_alr_another));
                             }
                         }
                         else
                         {
-                            toastMessage("Per iscriverti devi essere il creatore del gruppo!");
+                            toastMessage(getString(R.string.signup_must_creator));
                         }
                     }
                     else
                     {
-                        toastMessage("Inserire il nome di un gruppo esistente!");
+                        toastMessage(getString(R.string.enter_name_exist));
                     }
                 }
                 else
                 {
-                    editTextIscriviGruppo.setError("Riempire il campo!");
-                    toastMessage("Inserire il nome di un gruppo!");
+                    editTextIscriviGruppo.setError(getString(R.string.fill_field));
+                    toastMessage(getString(R.string.insert_name_team));
                 }
 
             }
@@ -310,14 +310,14 @@ public class InfoCasoDiStudio extends AppCompatActivity {
         if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             selectPdf();
         } else
-            Toast.makeText(InfoCasoDiStudio.this, "accetta il permesso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InfoCasoDiStudio.this, getString(R.string.accept_perm), Toast.LENGTH_SHORT).show();
     }
 
     void selectPdf() {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
-        intent = Intent.createChooser(intent, "Choose a file");
+        intent = Intent.createChooser(intent, getString(R.string.choos_fil));
         startActivityForResult(intent,86);
     }
 
@@ -333,7 +333,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
             toastMessage(pdfUri.toString());
 
         } else {
-            Toast.makeText(InfoCasoDiStudio.this, "non hai selezionato nessun file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InfoCasoDiStudio.this, getString(R.string.havent_select_fil), Toast.LENGTH_SHORT).show();
         }
         if(pdfUri!=null)
         uploadFile(pdfUri);
@@ -342,7 +342,7 @@ public class InfoCasoDiStudio extends AppCompatActivity {
     private void uploadFile(Uri pdfUri) {
 
         final ProgressDialog pd = new ProgressDialog(this);
-        pd.setTitle("uploading file");
+        pd.setTitle(getString(R.string.uploa_file));
         pd.show();
 
         storageReference= FirebaseStorage.getInstance().getReference();
@@ -359,20 +359,20 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content),"file uploaded", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(android.R.id.content),getString(R.string.file_uploa), Snackbar.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 pd.dismiss();
-                Toast.makeText(getApplicationContext(),"failed upload",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.fail_up),Toast.LENGTH_LONG).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
 
                 double progressPercent = (100.00 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                pd.setMessage("Progress"+ (int) progressPercent + "%");
+                pd.setMessage(getString(R.string.prog) + (int) progressPercent + "%");
             }
         });
     }
@@ -394,11 +394,11 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 list.add(arrlist);
             }
 
-            textViewNomeCorso.setText("Caso di studio : " + list.get(position).get(1).toString());
-            textViewEsame.setText("Nome esame : " + list.get(position).get(3).toString());
-            textViewDescrizione.setText("Descrizione : " + list.get(position).get(2).toString());
-            textViewProf.setText("Nome professore : " + list.get(position).get(5).toString());
-            textViewInfoNomeGruppo.setText("Nome gruppo : " + list.get(position).get(7).toString());
+            textViewNomeCorso.setText(getString(R.string.case_study) + list.get(position).get(1).toString());
+            textViewEsame.setText(getString(R.string.exam_name) + list.get(position).get(3).toString());
+            textViewDescrizione.setText( getString(R.string.descri) + list.get(position).get(2).toString());
+            textViewProf.setText(getString(R.string.prof_name) + list.get(position).get(5).toString());
+            textViewInfoNomeGruppo.setText(getString(R.string.group_name) + list.get(position).get(7).toString());
             nomeCartella = list.get(position).get(7).toString();
         }
     }
@@ -419,10 +419,10 @@ public class InfoCasoDiStudio extends AppCompatActivity {
                 list.add(arrlist);
             }
 
-            textViewNomeCorso.setText("Caso di studio : " + list.get(position).get(1).toString());
-            textViewEsame.setText("Nome esame : " + list.get(position).get(3).toString());
-            textViewDescrizione.setText("Descrizione : " + list.get(position).get(2).toString());
-            textViewProf.setText("Nome professore : " + list.get(position).get(5).toString());
+            textViewNomeCorso.setText(getString(R.string.case_study) + list.get(position).get(1).toString());
+            textViewEsame.setText(getString(R.string.exam_name) + list.get(position).get(3).toString());
+            textViewDescrizione.setText(getString(R.string.descri) + list.get(position).get(2).toString());
+            textViewProf.setText(getString(R.string.prof_name) + list.get(position).get(5).toString());
         }
     }
 

@@ -24,7 +24,7 @@ public class CreaCasoDiStudio extends AppCompatActivity {
         setContentView(R.layout.activity_crea_caso_di_studio);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Crea un caso di studio </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.crea_cs) + "</font>"));
         // Customize the back button
         //COLOR ACTION BAR
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0094FF")));
@@ -49,15 +49,15 @@ public class CreaCasoDiStudio extends AppCompatActivity {
 
                 if(esame.isEmpty()){
                     campiVuoti = true;
-                    editTextEsame.setError("Riempire il campo!");
+                    editTextEsame.setError(getString(R.string.fill_field));
                 }
                 if(descrizione.isEmpty()){
                     campiVuoti = true;
-                    editTextDescrizione.setError("Riempire il campo!");
+                    editTextDescrizione.setError(getString(R.string.fill_field));
                 }
                 if(nome.isEmpty()){
                     campiVuoti = true;
-                    editTextNome.setError("Riempire il campo!");
+                    editTextNome.setError(getString(R.string.fill_field));
                 }
 
                 if (!campiVuoti) {
@@ -65,15 +65,15 @@ public class CreaCasoDiStudio extends AppCompatActivity {
                     boolean insertUser = MainActivity.DB.insertCasoDiStudio(nome, descrizione, esame, MainActivity.utenteLoggato.matricola);
 
                     if (insertUser) {
-                        toastMessage("Creazione completata!");
+                        toastMessage(getString(R.string.crea_com));
                         editTextNome.setText("");
                         editTextDescrizione.setText("");
                         editTextEsame.setText("");
                     } else {
-                        toastMessage("Something went wrong");
+                        toastMessage(getString(R.string.some_wrong));
                     }
                 } else {
-                    toastMessage("Riempire tutti i campi!");
+                    toastMessage(getString(R.string.fill_fields));
                 }
             }
         });

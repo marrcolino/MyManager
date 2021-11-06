@@ -101,8 +101,8 @@ public class CercaCasiFragment extends Fragment implements RecyclerAdapter.ItemC
         }
         else
         {
-            editTextCercaCaso.setError("Riempire il campo!");
-            toastMessage("Riempire il campo di ricerca!");
+            editTextCercaCaso.setError(getString(R.string.fill_field));
+            toastMessage(getString(R.string.fill_field));
         }
     }
 

@@ -27,7 +27,7 @@ public class Registrazione extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\"> Registrazione </font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.reg) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -58,27 +58,27 @@ public class Registrazione extends AppCompatActivity {
 
                 if(email.isEmpty()){
                     campiVuoti = true;
-                    editTextEmail.setError("Riempire il campo!");
+                    editTextEmail.setError((getString(R.string.fill_field)));
                 }
                 if(password.isEmpty()){
                     campiVuoti = true;
-                    editTextPassword.setError("Riempire il campo!");
+                    editTextPassword.setError((getString(R.string.fill_field)));
                 }
                 if(nome.isEmpty()){
                     campiVuoti = true;
-                    editTextNome.setError("Riempire il campo!");
+                    editTextNome.setError((getString(R.string.fill_field)));
                 }
                 if(cognome.isEmpty()){
                     campiVuoti = true;
-                    editTextCognome.setError("Riempire il campo! ");
+                    editTextCognome.setError((getString(R.string.fill_field)));
                 }
                 if(dataNascita.isEmpty()){
                     campiVuoti = true;
-                    editTextDataNascita.setError("Riempire il campo! ");
+                    editTextDataNascita.setError((getString(R.string.fill_field)));
                 }
                 if(matricola.isEmpty()){
                     campiVuoti = true;
-                    editTextMatricola.setError("Riempire il campo!");
+                    editTextMatricola.setError((getString(R.string.fill_field)));
                 }
 
                 if (!campiVuoti) {
@@ -86,13 +86,13 @@ public class Registrazione extends AppCompatActivity {
                     boolean insertUser = MainActivity.DB.insertUserData( matricola , nome ,  cognome ,  email ,  password ,  dataNascita);
 
                     if (insertUser) {
-                        toastMessage("Registrazione completata!");
+                        toastMessage((getString(R.string.reg_com)));
                         startActivity(new Intent(Registrazione.this, Login.class));
                     } else {
-                        toastMessage("Something went wrong");
+                        toastMessage((getString(R.string.some_wrong)));
                     }
                 } else {
-                    toastMessage("Riempire tutti i campi!");
+                    toastMessage((getString(R.string.fill_fields)));
                 }
             }
         });

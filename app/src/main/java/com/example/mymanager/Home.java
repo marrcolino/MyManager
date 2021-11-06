@@ -110,7 +110,7 @@ public class Home extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-            Log.i(" "+String.valueOf(requestCode)+ resultCode,"Richiesta");
+            Log.i(" "+String.valueOf(requestCode)+ resultCode,getString(R.string.req));
             if(resultCode == RESULT_OK && data != null){
                 if (Home.galleria == true) {
                     selectedImage = data.getData();
@@ -121,7 +121,7 @@ public class Home extends AppCompatActivity {
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     photo.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                    String path = MediaStore.Images.Media.insertImage(Home.this.getContentResolver(), photo, "Title", null);
+                    String path = MediaStore.Images.Media.insertImage(Home.this.getContentResolver(), photo, getString(R.string.title), null);
                     ImageView imageView =findViewById(R.id.imageViewLogo);
                     imageView.setImageURI(Uri.parse(path));
                     selectedImage=Uri.parse(path);
@@ -133,8 +133,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void uploadimage() {
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setTitle("uploading image");
+        final ProgressDialog pd = new ProgressDialog(this);        pd.setTitle(getString(R.string.up_image));
         pd.show();
 
         final String randomkey = UUID.randomUUID().toString();
@@ -146,21 +145,21 @@ public class Home extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         // Get a URL to the uploaded content
-                        Snackbar.make(findViewById(android.R.id.content),"image uploaded", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(android.R.id.content),getString(R.string.ima_up), Snackbar.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         pd.dismiss();
-                        Toast.makeText(getApplicationContext(),"failed upload",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),getString(R.string.fail_up),Toast.LENGTH_LONG).show();
                     }
                 })
             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double progressPercent = (100.00 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    pd.setMessage("Progress"+ (int) progressPercent + "%");
+                    pd.setMessage(getString(R.string.prog) + (int) progressPercent + "%");
                 }
             });
     }
