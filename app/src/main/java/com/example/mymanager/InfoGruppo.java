@@ -29,7 +29,7 @@ public class InfoGruppo extends AppCompatActivity {
     private ArrayList<List> list = new ArrayList<List>();
     private ArrayList<List> listInfo = new ArrayList<List>();
     private int position;
-    private String partecipante2, partecipante3, partecipante4;
+    private String creatore, partecipante2, partecipante3, partecipante4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class InfoGruppo extends AppCompatActivity {
         setContentView(R.layout.activity_info_gruppo);
 
         //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#0094FF\">" + getString(R.string.app_name) + "</font>"));
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" +  getString(R.string.info_g) + "</font>"));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#FFFFFF\">" + getString(R.string.info_g) + "</font>"));
         // Customize the back button
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         //COLOR ACTION BAR
@@ -75,7 +75,7 @@ public class InfoGruppo extends AppCompatActivity {
         if(cursorNomeCaso.getCount() > 0)
         {
             while (cursorNomeCaso.moveToNext()) {
-                nomeCaso.setText(getString(R.string.case_study) + cursorNomeCaso.getString(0));
+                nomeCaso.setText(getString(R.string.cs_duep) + cursorNomeCaso.getString(0));
             }
         }
 
@@ -85,6 +85,7 @@ public class InfoGruppo extends AppCompatActivity {
         for(int i = 2; i<6; i++){
             if(list.get(position).get(i).toString().equals("vuoto"))
             {
+                //list.get(position).get(i) = "";
                 List<String> arrlistInfo = new ArrayList<String>();
                 arrlistInfo.add(" ");
                 arrlistInfo.add(" ");
@@ -146,10 +147,13 @@ public class InfoGruppo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean matricoleGiuste = true;
+                int vuoti = 0;
+                creatore = editTextCreatore.getText().toString();
 
                 if(part2.getText().toString().equals(""))
                 {
                     partecipante2 = "vuoto";
+                    vuoti++;
                 }
                 else
                 {
@@ -166,6 +170,7 @@ public class InfoGruppo extends AppCompatActivity {
                 if(part3.getText().toString().equals(""))
                 {
                     partecipante3 = "vuoto";
+                    vuoti++;
                 }
                 else
                 {
@@ -181,6 +186,7 @@ public class InfoGruppo extends AppCompatActivity {
                 if(part4.getText().toString().equals(""))
                 {
                     partecipante4 = "vuoto";
+                    vuoti++;
                 }
                 else
                 {
@@ -194,34 +200,68 @@ public class InfoGruppo extends AppCompatActivity {
                 }
 
                 if(matricoleGiuste
-                        && (!partecipante2.equals("vuoto") || !partecipante3.equals("vuoto") || !partecipante4.equals("vuoto"))
-                        && (!partecipante2.equals(partecipante3) && !partecipante2.equals(partecipante4) && !partecipante3.equals(partecipante4)))
+                        && (!partecipante2.equals("vuoto") || !partecipante3.equals("vuoto") || !partecipante4.equals("vuoto")))
+                //&& (!partecipante2.equals(partecipante3) && !partecipante2.equals(partecipante4) && !partecipante3.equals(partecipante4)))
                 {
-                    Boolean updateGruppo;
                     if(partecipante2.equals("vuoto"))
                     {
-                        if(!partecipante3.equals("vuoto"))
+                        partecipante2 = "vuoto2";
+                    }
+                    if(partecipante3.equals("vuoto"))
+                    {
+                        partecipante3 = "vuoto3";
+                    }
+                    if(partecipante4.equals("vuoto"))
+                    {
+                        partecipante4 = "vuoto4";
+                    }
+
+                    if(!creatore.equals(partecipante2) && !creatore.equals(partecipante3) && !creatore.equals(partecipante4)
+                            && !partecipante2.equals(partecipante3) && !partecipante2.equals(partecipante4) && !partecipante3.equals(partecipante4))
+                    {
+                        if(partecipante2.equals("vuoto2"))
                         {
-                            updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante3, partecipante2, partecipante4);
+                            partecipante2 = "vuoto";
+                        }
+                        if(partecipante3.equals("vuoto3"))
+                        {
+                            partecipante3 = "vuoto";
+                        }
+                        if(partecipante4.equals("vuoto4"))
+                        {
+                            partecipante4 = "vuoto";
+                        }
+
+                        Boolean updateGruppo;
+                        if(partecipante2.equals("vuoto"))
+                        {
+                            if(!partecipante3.equals("vuoto"))
+                            {
+                                updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante3, partecipante2, partecipante4);
+                            }
+                            else
+                            {
+                                updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante4, partecipante2, partecipante3);
+                            }
                         }
                         else
                         {
-                            updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante4, partecipante2, partecipante3);
+                            updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante2, partecipante3, partecipante4);
                         }
+
+                        if(updateGruppo)
+                            toastMessage(getString(R.string.saved_change));
+                        else
+                            toastMessage(getString(R.string.some_wrong));
                     }
                     else
                     {
-                        updateGruppo = MainActivity.DB.updateGruppo(list.get(position).get(0).toString(), nomeGruppo.getText().toString(), partecipante2, partecipante3, partecipante4);
+                        toastMessage(getString(R.string.som_fre_same));
                     }
-
-                    if(updateGruppo)
-                        toastMessage(getString(R.string.saved_change));
-                    else
-                        toastMessage(getString(R.string.some_wrong));
                 }
                 else
                 {
-                    toastMessage(getString(R.string.one_freshman_same_incorr));
+                    toastMessage(getString(R.string.one_fre_incorr));
                 }
             }
         });
@@ -323,6 +363,7 @@ public class InfoGruppo extends AppCompatActivity {
             }
         });
     }
+
 
     // this event will enable the back
     // function to the button on press

@@ -133,4 +133,9 @@
     <string name="att_fil">File allegati</string>
     <string name="grop_enroll">Gruppi iscritti al caso di studio</string>
     <string name="reg">Registrazione</string>
+    <string name="cs_duep">Caso di studio:</string>
+    <string name="som_fre_same">Alcune delle matricole sono uguali!</string>
+    <string name="one_fre_incorr">Una delle matricole è errata, oppure inserire almeno un partecipante!</string>
+    <string name="group_cre_com">Creazione gruppo completata!</string>
+    <string name="grop_name_alre">Nome gruppo già esistente!</string>
 </resources>

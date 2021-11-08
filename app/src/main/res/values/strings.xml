@@ -135,4 +135,9 @@
     <string name="att_fil">Attached files</string>
     <string name="grop_enroll">Groups enrolled in the case study</string>
     <string name="reg">Registration</string>
+    <string name="cs_duep">Case study:</string>
+    <string name="som_fre_same">Some of the freshman are the same!</string>
+    <string name="one_fre_incorr">One of the freshman is incorrect, or enter al least one participant!</string>
+    <string name="group_cre_com">Group creation completed!</string>
+    <string name="grop_name_alre">Group name already exists!</string>
 </resources>
