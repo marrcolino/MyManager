@@ -141,6 +141,7 @@
                 android:inputType="numberDecimal"
                 android:padding="10dp"
                 android:shadowColor="@color/black"
+                android:enabled="false"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -49,7 +49,6 @@ public class AccountFragment extends Fragment {
         buttonView.setBackgroundColor(Color.WHITE);
         buttonView.setText(content);
 
-
         buttonView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
