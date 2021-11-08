@@ -130,7 +130,7 @@
     <string name="crea_grup">Create a group</string>
     <string name="list_doc_group">List of documents uploaded by the group:</string>
     <string name="no_doc_f">No documents found!</string>
-    <string name="crea_cs">Create a case study</string>
+    <string name="crea_cs">Create study case</string>
     <string name="info_g">Group info</string>
     <string name="att_fil">Attached files</string>
     <string name="grop_enroll">Groups enrolled in the case study</string>
